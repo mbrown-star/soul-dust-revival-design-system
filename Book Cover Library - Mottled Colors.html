@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Book Cover Library — Mottled Colors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400&family=Source+Serif+4:ital,wght@0,400;1,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17231f;--dusk:#2a4038;--moss:#4b6358;--parchment:#f7f2e6;--ember:#de3a2e;--gold:#f0b93e;--umber:#3a281c;--dust:#a67c52;--haze:#d9c3a3;--rust:#b8501f}
+*{box-sizing:border-box}
+body{margin:0;background:#e9e5dc;font-family:"Archivo",system-ui,sans-serif;color:var(--ink);padding:48px 40px 72px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:30px;margin:0 0 6px}
+.lede{font-family:"Source Serif 4",Georgia,serif;font-size:16px;color:#5d5a52;max-width:680px;margin:0 0 40px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px 32px}
+figure{margin:0}
+figcaption{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6d6a62;margin-top:12px;display:flex;justify-content:space-between;gap:8px}
+figcaption .hex{font-variant-numeric:tabular-nums;opacity:.7}
+a{color:var(--rust)}
+a:hover{color:var(--ember)}
+
+/* ── The mottle: a low-frequency cloud layer + fine grain + vignette, over a flat brand color ── */
+.cover{position:relative;overflow:hidden;aspect-ratio:300/456;background:var(--bg);box-shadow:0 10px 28px rgba(23,35,31,.22)}
+.cover::before{content:"";position:absolute;inset:-25%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23c)'/%3E%3C/svg%3E");background-size:130% 130%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+.cover::after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E"),radial-gradient(115% 85% at 50% 32%,rgba(255,255,255,.13),transparent 58%),radial-gradient(125% 115% at 50% 50%,transparent 38%,rgba(0,0,0,.34) 100%);mix-blend-mode:soft-light;opacity:.9;pointer-events:none}
+.cover.light::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E"),radial-gradient(115% 85% at 50% 32%,rgba(255,255,255,.2),transparent 58%),radial-gradient(125% 115% at 50% 50%,transparent 42%,rgba(58,40,28,.22) 100%)}
+</style></head>
+<body>
+
+<h1>Book cover library — mottled colors</h1>
+<p class="lede">Fifteen flat brand colors under the same three-layer mottle treatment as the reference cover: a low-frequency cloud blotch, a fine grain, and an edge vignette. Blank grounds — set a title lockup over them, or see <a href="Book Cover Library - Image Treatments.html">the image-treatment library</a> for typeset layouts.</p>
+
+<div class="grid">
+
+<figure><div class="cover" style="--bg:#2a4038"></div><figcaption><span>Dusk</span><span class="hex">#2a4038</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#17231f"></div><figcaption><span>Ink</span><span class="hex">#17231f</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#4b6358"></div><figcaption><span>Moss</span><span class="hex">#4b6358</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#1f2f2a"></div><figcaption><span>Deep Pine</span><span class="hex">#1f2f2a</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#3d4a33"></div><figcaption><span>Olive</span><span class="hex">#3d4a33</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#3a281c"></div><figcaption><span>Umber</span><span class="hex">#3a281c</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#1a120c"></div><figcaption><span>Ink Brown</span><span class="hex">#1a120c</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#6b5344"></div><figcaption><span>Dusk Brown</span><span class="hex">#6b5344</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#b8501f"></div><figcaption><span>Rust</span><span class="hex">#b8501f</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#de3a2e"></div><figcaption><span>Ember</span><span class="hex">#de3a2e</span></figcaption></figure>
+<figure><div class="cover" style="--bg:#8c3a2c"></div><figcaption><span>Oxblood</span><span class="hex">#8c3a2c</span></figcaption></figure>
+<figure><div class="cover light" style="--bg:#a67c52"></div><figcaption><span>Dust</span><span class="hex">#a67c52</span></figcaption></figure>
+<figure><div class="cover light" style="--bg:#f0b93e"></div><figcaption><span>Gold</span><span class="hex">#f0b93e</span></figcaption></figure>
+<figure><div class="cover light" style="--bg:#d9c3a3"></div><figcaption><span>Haze</span><span class="hex">#d9c3a3</span></figcaption></figure>
+<figure><div class="cover light" style="--bg:#f7f2e6"></div><figcaption><span>Parchment</span><span class="hex">#f7f2e6</span></figcaption></figure>
+
+</div>
+</body></html>

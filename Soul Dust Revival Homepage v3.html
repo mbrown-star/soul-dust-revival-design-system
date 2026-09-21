@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Soul Dust Revival</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a120c;--umber:#3a281c;--dusk:#6b5344;--paper:#f7ecd8;--ember-700:#b8501f;--ember-500:#e2762c;--ember-300:#f2a34f;--gold-500:#f6c453;--gold-300:#fbe0a1;--sun-100:#fff4d6;--dust-500:#a67c52;--dust-300:#c9a66b;--dust-100:#e8d3ae;--haze-300:#d9c3a3;}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink)}
+.display{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.94}
+.grad-text{background:linear-gradient(90deg,var(--gold-500) 0%,var(--ember-500) 55%,var(--ember-700) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scripture{font-family:Georgia,'Times New Roman',serif;font-style:italic}
+a{color:var(--ember-700)}
+a:hover{color:var(--ember-500)}
+
+nav{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:24px 56px}
+.brand{display:flex;align-items:center;gap:12px}
+.badge{width:38px;height:38px;border-radius:50%;border:2px solid var(--gold-500);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.badge span{font-family:'Anton',sans-serif;color:var(--gold-500);font-size:13px}
+.brand-name{color:var(--sun-100);font-size:15px;letter-spacing:.14em;font-weight:600}
+.brand .display{font-size:20px;letter-spacing:.02em}
+.nav-links{display:flex;gap:36px}
+.nav-links a{color:var(--haze-300);text-decoration:none;font-size:14px;letter-spacing:.03em}
+.nav-links a:hover{color:var(--gold-300)}
+
+.hero{position:relative;width:100%;aspect-ratio:1916/821;max-height:100vh;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:var(--ink)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,18,12,.6) 0%,rgba(26,18,12,.42) 40%,rgba(26,18,12,.15) 68%,rgba(26,18,12,.42) 100%)}
+.hero-headline{position:absolute;top:34%;left:0;right:0;text-align:center;z-index:2;padding:0 24px}
+.hero-headline h1{font-size:104px;margin:0;text-shadow:0 4px 30px rgba(26,18,12,.7)}
+.hero-copy{background:var(--ink);text-align:center;padding:44px 24px 56px;position:relative;z-index:2}
+.hero-copy .verse{color:var(--sun-100);font-size:22px;margin:0;letter-spacing:.02em;max-width:760px;margin-left:auto;margin-right:auto}
+.cta{display:inline-block;margin-top:28px;padding:16px 40px;background:var(--ember-500);color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.04em;border-radius:4px;font-size:15px}
+.cta:hover{background:var(--gold-500);color:var(--ink)}
+
+.section{padding:100px 56px;max-width:920px;margin:0 auto}
+.section.dark{background:var(--ink);color:var(--paper);max-width:none;padding:120px 56px}
+.section.dark .inner{max-width:760px;margin:0 auto;text-align:center}
+.verse-mark{font-size:64px;color:var(--gold-500);line-height:1;margin-bottom:8px;font-family:Georgia,serif}
+.verse-full{font-size:30px;line-height:1.5}
+.verse-ref{margin-top:24px;color:var(--dust-300);letter-spacing:.1em;font-size:14px;font-family:system-ui,sans-serif;font-style:normal}
+
+.about h2{font-size:40px;margin:0 0 24px}
+.about p{font-size:18px;line-height:1.75;color:var(--umber);max-width:640px}
+.rule{width:64px;height:3px;background:var(--gold-500);border-radius:2px;margin:0 0 24px}
+
+.signup{background:var(--dust-100);padding:80px 56px;text-align:center}
+.signup h2{font-size:34px;margin:0 0 12px}
+.signup p{color:var(--dusk);margin:0 0 28px;font-size:16px}
+.signup form{display:flex;gap:12px;justify-content:center;max-width:440px;margin:0 auto}
+.signup input{flex:1;padding:14px 16px;border:1px solid var(--dust-500);border-radius:4px;font-size:15px;font-family:system-ui,sans-serif}
+.signup input:focus{outline:2px solid var(--ember-500);outline-offset:2px}
+.signup button{padding:14px 28px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;font-weight:600;cursor:pointer;font-size:15px}
+.signup button:hover{background:var(--umber)}
+
+footer{background:var(--ink);color:var(--haze-300);padding:56px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+footer .brand-name{color:var(--gold-300)}
+footer .foot-links{display:flex;gap:28px;font-size:14px}
+footer .foot-links a{color:var(--haze-300)}
+footer .copy{font-size:13px;color:var(--dusk);margin-top:8px}
+
+@media (max-width:720px){.hero-content h1{font-size:52px}nav{padding:20px 24px}.nav-links{display:none}.section,.section.dark{padding:64px 24px}}
+</style></head>
+<body>
+
+<nav>
+<div class="brand"><div class="badge"><span>SDR</span></div><span class="display grad-text">Soul Dust Revival</span></div>
+<div class="nav-links"><a href="#about">About</a><a href="#verse">The Verse</a><a href="#join">Join Us</a></div>
+</nav>
+
+<section class="hero">
+<img src="uploads/ChatGPT%20Image%20Jul%2024%2C%202026%2C%2010_50_55%20AM.png" alt="Five silhouetted travelers walking through a desert canyon toward a glowing sunset">
+<div class="hero-headline"><h1 class="display grad-text">Soul Dust Revival</h1></div>
+</section>
+
+<section class="section dark" id="verse">
+<div class="inner scripture">
+<div class="verse-mark">&ldquo;</div>
+<p class="verse-full">My soul clings to the dust; give me life according to your word!</p>
+<p class="verse-ref">PSALM 119:25 · ESV</p>
+</div>
+<div style="text-align:center;margin-top:32px"><a href="#join" class="cta">Join the Revival</a></div>
+</section>
+
+<section class="section about" id="about">
+<div class="rule"></div>
+<h2 class="display">Rising from the dust</h2>
+<p>Soul Dust Revival is a gathering for the weary and the waiting — those who feel low, worn down, or far from where they started. Drawing from Psalm 119:25, we come together to be quickened: renewed in step, in spirit, and in word, before walking back out into the light.</p>
+</section>
+
+<section class="signup" id="join">
+<h2 class="display">Be part of it</h2>
+<p>Leave your email and we'll let you know when and where the next revival gathers.</p>
+<form onsubmit="return false"><input type="email" placeholder="you@example.com" aria-label="Email address"><button type="submit">Notify me</button></form>
+</section>
+
+<footer>
+<div class="brand"><div class="badge" style="width:28px;height:28px"><span style="font-size:10px">SDR</span></div><span class="display grad-text" style="font-size:20px">Soul Dust Revival</span></div>
+<div class="foot-links"><a href="#about">About</a><a href="#verse">The Verse</a><a href="#join">Join Us</a></div>
+<p class="copy">Psalm 119:25 (ESV) · Soul Dust Revival</p>
+</footer>
+
+</body></html>

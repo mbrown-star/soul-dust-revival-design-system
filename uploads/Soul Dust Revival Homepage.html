@@ -1,0 +1,151 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Soul Dust Revival</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a120c;--umber:#3a281c;--dusk:#6b5344;--parchment:#f7ecd8;--ember:#e2762c;--ember-700:#b8501f;--gold:#f6c453;--gold-300:#fbe0a1;--sun-100:#fff4d6;--dust-500:#a67c52;--moss:#c9a66b;--dust-100:#e8d3ae;--haze-300:#d9c3a3;}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-sans);background:var(--parchment);color:var(--ink)}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--ember)}
+.display-brand{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.94}
+.grad-text{background:linear-gradient(90deg,var(--gold) 0%,var(--ember) 55%,var(--ember-700) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+header{border-bottom:1px solid color-mix(in oklch,var(--dusk) 20%,transparent);background:var(--ink)}
+.header-inner{max-width:1024px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.badge{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.badge span{font-family:'Anton',sans-serif;color:var(--gold);font-size:12px}
+.brand .display-brand{font-size:19px;letter-spacing:.02em}
+nav.primary{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500}
+nav.primary a{color:var(--haze-300)}
+nav.primary a:hover{color:var(--gold-300)}
+
+.hero{position:relative;overflow:hidden;min-height:100vh}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,35,31,0) 0%,rgba(23,35,31,.35) 55%,rgba(23,35,31,.85) 100%);z-index:1}
+.hero-ground{position:absolute;left:0;right:0;bottom:0;height:96px;background:var(--ink)}
+.hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:160px 24px 200px;text-align:center}
+.eyebrow{font-family:var(--font-sans);font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--parchment);margin:0 0 24px}
+.hero-inner h1{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;font-size:64px;line-height:.94;color:var(--parchment);margin:0 0 12px;text-shadow:0 2px 24px rgba(26,18,12,.5)}
+.verse{font-family:var(--font-serif);font-style:italic;font-size:20px;color:var(--parchment);max-width:520px;margin:0 auto 40px}
+.sub{font-family:var(--font-serif);font-size:18px;color:var(--parchment);max-width:600px;margin:0 auto 40px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{font-family:var(--font-sans);font-weight:600;border-radius:8px;padding:12px 24px;font-size:15px;display:inline-block}
+.btn-primary{background:var(--ember);color:var(--ink)}
+.btn-primary:hover{background:var(--gold);color:var(--ink)}
+.btn-secondary{background:color-mix(in oklch,var(--parchment) 90%,transparent);color:var(--ink)}
+.btn-secondary:hover{color:var(--ember)}
+
+.section{max-width:1024px;margin:0 auto;padding:80px 24px}
+.section h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;font-size:32px;color:var(--ink);margin:0 0 32px}
+.grid-products{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.card-product .thumb{aspect-ratio:3/4;background:var(--dusk);border-radius:8px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;color:color-mix(in oklch,var(--parchment) 40%,transparent);font-family:var(--font-display);font-size:14px}
+.card-product .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--moss);margin:0 0 4px}
+.card-product h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;color:var(--ink);margin:0;font-size:16px}
+.card-product h3:hover{color:var(--ember)}
+.card-product .price{font-size:14px;color:var(--moss);margin:4px 0 0}
+
+.steps{background:var(--dusk);color:var(--parchment)}
+.steps-inner{max-width:1024px;margin:0 auto;padding:80px 24px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step-num{font-family:'Anton',sans-serif;font-weight:400;font-size:40px;color:var(--gold);margin:0 0 8px}
+.step h3{font-family:var(--font-sans);font-weight:600;margin:0 0 6px}
+.step p{font-family:var(--font-serif);font-size:14px;color:color-mix(in oklch,var(--parchment) 80%,transparent);margin:0}
+
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-grid h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-weight:400;color:var(--ink);margin:0 0 4px;font-size:17px}
+.blog-grid h3:hover{color:var(--ember)}
+.blog-grid .date{font-size:12px;color:var(--moss);margin:0}
+.view-all{font-size:14px;font-weight:500;color:var(--ember)}
+.view-all:hover{text-decoration:underline}
+
+footer{background:var(--ink);color:var(--parchment);margin-top:0}
+.footer-inner{max-width:1024px;margin:0 auto;padding:48px 24px}
+.footer-inner .brand{color:var(--parchment);margin:0 0 4px}
+.footer-inner .verse{color:color-mix(in oklch,var(--parchment) 70%,transparent);font-size:14px;margin:0 0 32px;text-align:left}
+.footer-links{display:flex;flex-wrap:wrap;gap:24px;font-size:14px}
+.footer-links a{color:var(--parchment)}
+.footer-links a:hover{color:var(--gold)}
+.copy{font-size:12px;color:color-mix(in oklch,var(--parchment) 50%,transparent);margin-top:32px}
+
+@media (max-width:720px){.hero-inner h1{font-size:40px}.grid-products{grid-template-columns:repeat(2,1fr)}.steps-grid,.blog-grid{grid-template-columns:1fr}nav.primary{display:none}}
+</style></head>
+<body>
+
+<header>
+<div class="header-inner">
+<a href="index.html" class="brand"><div class="badge"><span>SDR</span></div><span class="display-brand grad-text">Soul Dust Revival</span></a>
+<nav class="primary" aria-label="Primary">
+<a href="ui_kits/storefront/index.html">Books &amp; Studies</a>
+<a href="#blog">Blog</a>
+<a href="ui_kits/storefront/index.html">Cart</a>
+<a href="ui_kits/study-app/index.html">Log in</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<img class="bg" src="uploads/ChatGPT Image Jul 29, 2026, 11_02_12 AM.png" alt="Desert sunset with dust haze over a wide plain">
+<div class="hero-ground"></div>
+<div class="hero-inner">
+<p class="eyebrow">Psalm 119:25</p>
+<h1>Soul Dust<br>Revival</h1>
+<p class="verse">&ldquo;My soul clings to the dust; give me life according to your word.&rdquo;</p>
+<p class="sub">Studies, devotionals, and a discipleship path for men willing to be honest about the dust — and willing to be revived.</p>
+<div class="hero-ctas">
+<a href="ui_kits/storefront/index.html" class="btn btn-primary">Explore studies &amp; books</a>
+<a href="#blog" class="btn btn-secondary">Read the blog</a>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2>Start where you are</h2>
+<div class="grid-products">
+<div class="card-product"><div class="thumb">Soul Dust Revival</div><p class="kicker">Study · Web app</p><h3><a href="ui_kits/storefront/index.html">New Beginnings</a></h3><p class="price">$24.00</p></div>
+<div class="card-product"><div class="thumb">Soul Dust Revival</div><p class="kicker">Book · Ships to you</p><h3><a href="ui_kits/storefront/index.html">Rooted: A Bible Study Book</a></h3><p class="price">$18.00</p></div>
+<div class="card-product"><div class="thumb">Soul Dust Revival</div><p class="kicker">Study · Web app</p><h3><a href="ui_kits/storefront/index.html">Rooted — Study + Book Bundle</a></h3><p class="price">$36.00</p></div>
+<div class="card-product"><div class="thumb">Soul Dust Revival</div><p class="kicker">Study · Web app</p><h3><a href="ui_kits/storefront/index.html">Letting Go</a></h3><p class="price">$24.00</p></div>
+</div>
+</section>
+
+<section class="steps">
+<div class="steps-inner">
+<h2 style="color:var(--parchment)">How a study works</h2>
+<div class="steps-grid">
+<div class="step"><p class="step-num">1</p><h3>Choose a study</h3><p>Pick a study built for where you are — a season of doubt, discipline, or just showing up honestly.</p></div>
+<div class="step"><p class="step-num">2</p><h3>Read it, alone or together</h3><p>Each lesson mixes short readings, video, and Scripture — built for a single sitting or a group discussion.</p></div>
+<div class="step"><p class="step-num">3</p><h3>Answer, and be answered</h3><p>Every study includes real questions — the kind that ask something of you, not just about you.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="blog">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px">
+<h2 style="margin:0">From the blog</h2>
+<a href="#blog" class="view-all">View all</a>
+</div>
+<div class="blog-grid">
+<div><h3><a href="#blog">What it means to cling to the dust</a></h3><p class="date">July 12, 2026</p></div>
+<div><h3><a href="#blog">Starting again, honestly</a></h3><p class="date">June 28, 2026</p></div>
+<div><h3><a href="#blog">A prayer for the in-between</a></h3><p class="date">June 14, 2026</p></div>
+</div>
+</section>
+
+<footer>
+<div class="footer-inner">
+<p class="brand" style="font-family:'Anton',sans-serif;text-transform:uppercase;font-size:18px;display:flex;align-items:center;gap:10px"><span class="badge" style="width:28px;height:28px"><span style="font-size:10px">SDR</span></span>Soul Dust <span style="color:var(--gold)">Revival</span></p>
+<p class="verse">&ldquo;My soul clings to the dust; give me life according to your word.&rdquo; — Psalm 119:25, ESV</p>
+<nav class="footer-links" aria-label="Footer">
+<a href="ui_kits/storefront/index.html">Books &amp; Studies</a>
+<a href="#blog">Blog</a>
+<a href="#">Privacy</a>
+<a href="ui_kits/study-app/index.html">Log in</a>
+<a href="ui_kits/study-app/index.html">Sign up</a>
+</nav>
+<p class="copy">© 2026 Soul Dust Revival.</p>
+</div>
+</footer>
+
+</body></html>
