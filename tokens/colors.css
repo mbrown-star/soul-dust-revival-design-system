@@ -25,7 +25,7 @@
 --accent-ember:var(--ember);
 --accent-gold:var(--gold);
 --focus-ring:var(--gold);
---state-error:var(--ember);             /* 2.62:1 — pair error text with an icon or border, never color alone */
+--state-error:#a8301c;             /* 5.78:1 — error text; pair with a word or icon, never color alone */
 --state-error-strong:var(--state-error);/* used by the admin block editor's Delete link */
 --state-success:#3b5a2b;                /* muted forest green, 6.69:1 */
 --state-warning:#8d6407;                /* Gold 500 darkened for AA, 4.53:1 */

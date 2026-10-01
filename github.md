@@ -1,5 +1,10 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: error color
+date: 2026-10-01
+- `state-error` is now `#a8301c` (5.78:1 on parchment), replacing ember, which fails as text.
+- New "keep the web app in step" rule: study-platform-scaffold now reads these tokens from its `app/globals.css`.
+
 ## Sync from Claude design system: reorganization
 date: 2026-10-01
 source: "Soul Dust Revival" design system in Claude (the master copy). This repo is the backup, synced at the end of each session.

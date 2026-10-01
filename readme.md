@@ -5,6 +5,7 @@ The design system for **Soul Dust Revival**, a Psalm 119:25 devotional ministry 
 ## How we work
 
 - **The Soul Dust Revival design system in Claude is the master copy.** This repo is its versioned backup. Don't edit it independently: change the system in Claude, then at the end of that session copy the changes here and add a line to `github.md`.
+- **Keep the web app in step.** `mbrown-star/study-platform-scaffold` takes its colors from CSS variables in `app/globals.css` (mapped in `tailwind.config.js`) and its fonts from `app/layout.tsx`. When a color or font changes, update those files in the same session.
 - **Log every change** as a dated entry at the top of the Changelog section (`CHANGELOG.md`): what changed and why, in a few lines. This README holds only the current rules. History goes in the changelog.
 - **Finished covers don't live here.** Each print-ready cover PDF goes in the shared drive under *Soul Dust Revival → [Claude Code Covers](https://drive.google.com/drive/folders/17VHHakHBc2b0LlbSSa_JYw1e3bshOl4M) → <title>*, with that title's build notes. This system keeps only what's needed to *make* a cover (see Covers below).
 - **Building a cover:** read the rules in `assets/applied-covers/README.md` → take the layout numbers from `calibration.json` (never retype them) → pick an unused ground from `CoverBlendMottlePairings` and record it in the register → render → `verify_covers.py` must exit 0 → check the full, back, front and spine crops → export the PDF to the Covers folder → add the title to the register and the changelog.

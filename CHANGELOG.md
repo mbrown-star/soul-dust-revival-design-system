@@ -2,6 +2,10 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-01: error color and web app port
+- `state-error` changed from ember (2.62:1, fails as text) to `#a8301c` (5.78:1 on parchment), so error messages pass WCAG AA.
+- The study-platform-scaffold web app now takes its colors and fonts from these tokens (CSS variables in `app/globals.css`, mapped in `tailwind.config.js`, Anton via `next/font`).
+
 ## 2026-10-01: reorganization
 - Finished cover PDFs moved to the shared drive (*Claude Code Covers*, one folder per title with its build notes). Only the Ephesians reference stays here, in `applied-covers`. Duplicate files outside `project/` removed.
 - READMEs rewritten as current rules. Their build history moved into this changelog.
