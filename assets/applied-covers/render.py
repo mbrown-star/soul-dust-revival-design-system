@@ -2,18 +2,31 @@
 render.py -- render build/<key>.html to build/png/<key>.png at exact print pixels.
 
 Chromium (Playwright) at device scale 1: one CSS px = one print pixel at 300dpi.
-Requires Liberation Serif and DejaVu Serif Condensed (fonts-liberation, fonts-dejavu-extra);
+Requires Liberation Serif and DejaVu Serif Condensed, bundled in fonts/ and installed automatically;
 it stops if they're missing rather than silently substituting.
 
 Usage: python3 render.py [key ...]
 """
-import json, os, subprocess, sys
+import json, os, shutil, subprocess, sys
 from playwright.sync_api import sync_playwright
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(BASE, "build")
 
+def install_bundled_fonts():
+    """Copy fonts/ into ~/.fonts and refresh the cache, so any machine renders identically."""
+    src = os.path.join(BASE, "fonts")
+    if not os.path.isdir(src):
+        return
+    dst = os.path.expanduser("~/.fonts")
+    os.makedirs(dst, exist_ok=True)
+    for f in os.listdir(src):
+        if f.endswith(".ttf") and not os.path.exists(os.path.join(dst, f)):
+            shutil.copy(os.path.join(src, f), dst)
+    subprocess.run(["fc-cache", "-f"], capture_output=True)
+
 def check_fonts():
+    install_bundled_fonts()
     out = subprocess.run(["fc-list"], capture_output=True, text=True).stdout
     spine_font = json.load(open(os.path.join(BASE, "calibration.json")))["spine"].get("font_family", "DejaVu Serif")
     missing = [f for f in ("Liberation Serif", spine_font) if f not in out]
