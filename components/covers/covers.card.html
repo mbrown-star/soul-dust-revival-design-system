@@ -1,0 +1,37 @@
+<!-- @dsCard group="Covers" viewport="1000x780" name="Wraparound Cover" subtitle="Parametrized front/back/spine render from calibration.json" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:24px;background:#fff;font-family:system-ui}.note{font-size:13px;color:#888;margin:0 0 14px}.row{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}.col{display:flex;flex-direction:column;align-items:center}.cap{margin-top:10px;font-size:12px;color:#666;text-align:center}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const { WraparoundCover } = (window.__DS || (window.__DS = Object.keys(window).filter(k=>/DesignSystem/.test(k)).map(k=>window[k]).find(o=>o&&o.Button)||{}));
+const items = ["A Scripture Study Dive essay", "The full passage in the World English Bible", "Five word studies in Greek and Hebrew", "Five Life Application practices and a daily prayer", "A Bottom Line and a benediction"];
+const confession = { view: "full", height: 300, pages: 127, bg: "#211b16", title: "Confession & Repentance", tagline: "Honest at Last, and Not Alone", themeLine: "FROM DUST TO REVIVAL", kicker: "PART THREE \u00b7 A STUDY OF",
+  backHook: "Confession is not a season a man finishes. It is a road he keeps taking.",
+  backParaOne: "Confession & Repentance takes the one subject most men would rather manage quietly and brings it into the light for twelve straight weeks.",
+  backParaTwo: "Each week keeps walking the same road \u2014 not further from the man\u2019s real failures, but closer to the Christ who meets him in them.", backItems: items };
+const formed = { view: "full", height: 300, pages: 234, bg: "#23282b", title: "Formed and Sent", tagline: "Shaped by Grace, Sent in Love", themeLine: "FROM DUST TO SENDING", kicker: "PART TWO \u00b7 A STUDY OF",
+  backHook: "Union was never the finish line. It sends you somewhere.",
+  backParaOne: "Formed and Sent carries the Soul Dust Revival workbook into its second half.",
+  backParaTwo: "Movement Three, \u201cFormation,\u201d spends six weeks on the shaping only God can do in a man He has already raised.", backItems: items };
+const life = { view: "front", height: 260, pages: 165, bg: "#1f2f2a", title: "Life", tagline: "Revival, Lived One Ordinary Day", themeLine: "FROM DUST TO GLORY", kicker: "PART FOUR \u00b7 A STUDY OF" };
+const outOfTheDust = { view: "front", height: 260, pages: 219, bg: "#241a12", title: "Out of the Dust", tagline: "Named in the Dust, Raised in Christ", themeLine: "FROM DUST TO UNION", kicker: "PART ONE \u00b7 A STUDY OF" };
+function Demo(){
+  return <div>
+    <p className="note">Narrowest and widest spines at the same height: the spine type should read as the same size on both.</p>
+    <div className="row">
+      <div className="col"><WraparoundCover {...confession}/><div className="cap">Confession &amp; Repentance — 127pp, narrowest spine</div></div>
+      <div className="col"><WraparoundCover {...formed}/><div className="cap">Formed and Sent — 234pp, widest spine</div></div>
+    </div>
+    <p className="note" style={{marginTop:28}}>Shortest and longest titles, front panel only: both stay on one line.</p>
+    <div className="row">
+      <div className="col"><WraparoundCover {...life}/><div className="cap">"Life" — 4 letters</div></div>
+      <div className="col"><WraparoundCover {...outOfTheDust}/><div className="cap">"Out of the Dust" — 15 letters</div></div>
+    </div>
+  </div>;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>

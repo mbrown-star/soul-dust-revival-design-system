@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "purpose": "Single source of truth for every measured value gen_covers.py uses to match the Ephesians reference cover. gen_covers.py MUST read its layout numbers from this file, never re-derive or hardcode them inline. verify_covers.py checks a fresh render against these same numbers before any delivery.",
+    "reference_file": "Soul_Dust_Revival_Ephesians_Cover.pdf (the actual print-ready PDF, not a screenshot)",
+    "reference_render": "rendered at true 300dpi via PyMuPDF (fitz), then measured pixel-by-pixel (row/column brightness banding for cream/gold text, color-channel masks to tell gold from cream) -- a screenshot or photo of the cover is NOT precise enough; always re-render the source PDF at 300dpi before measuring",
+    "reference_dims_px_at_300dpi": {"full_w": 3844, "full_h": 2775, "panel_w": 1838, "spine_w": 168},
+    "last_calibrated": "2026-09-27",
+    "how_to_recalibrate": "If the reference cover ever changes, or a measurement here is ever in doubt: render the reference PDF fresh at 300dpi, crop front/back/spine panels, measure each element listed below the same way (see 'measured_as' on each entry), update the value here, then re-run gen_covers.py and verify_covers.py. Never eyeball a size change directly in gen_covers.py without updating this file first -- that is exactly how the earlier rounds of retries happened."
+  },
+
+  "keyline": {
+    "top_bottom_inset_frac_of_panel_height": 0.065,
+    "left_right_inset_frac_of_panel_width": 0.07,
+    "double_line_gap_frac_of_panel_height": 0.006,
+    "line_weight_frac_of_dpi": 0.012,
+    "measured_as": "outer/inner line pixel position on both front and back panel corners, as a fraction of that panel's own height (top/bottom) or width (left/right) -- NOT the same fraction on both axes, since the panel is much taller than it is wide"
+  },
+
+  "back_panel": {
+    "content_pad_top_extra_frac_of_panel_height": 0.085,
+    "content_pad_bottom_extra_frac_of_panel_height": 0.085,
+    "content_pad_x_frac_of_panel_width": 0.10,
+    "measured_as": "gap between the inner keyline and the first line of body text (top), and between the last line of the footer and the inner keyline (bottom); gap between the inner keyline and the left edge of body text (sides). 'extra' means ADDED ON TOP OF the keyline's own inset, not measured from the trim edge."
+  },
+
+  "front_panel": {
+    "publisher_line_font_frac_of_panel_height": 0.011,
+    "series_name_font_frac_of_panel_height": 0.0255,
+    "series_name_color": "cream",
+    "tagline_font_frac_of_panel_height": 0.0222,
+    "byline_font_frac_of_panel_height": 0.0228,
+    "title_font_max_frac_of_panel_height": 0.081,
+    "title_font_weight": 500,
+    "title_min_frac_of_panel_height": 0.05,
+    "y_publisher_frac": 0.13,
+    "y_series_frac": 0.175,
+    "y_diamonds_frac": 0.22,
+    "y_kicker_frac": 0.35,
+    "y_title_center_frac": 0.42,
+    "y_tagline_frac": 0.50,
+    "y_rule_frac": 0.545,
+    "y_byline_frac": 0.585,
+    "y_anchor_frac": 0.64,
+    "y_theme_line_frac": 0.825,
+    "y_kind_line_frac": 0.874,
+    "measured_as": "cap-height of each element as a fraction of the front panel's own height (fullh_px), and vertical center position as a fraction of the same. The publisher line and series name were re-measured against the print PDF after an earlier pass, sourced from a screenshot, had the series name as gold and undersized -- it is cream and larger.",
+    "title_length_note": "The reference has only ONE data point for title size -- the single word 'Ephesians' (9 letters) -- which calibrates title_font_max. This series' titles run from 4 to 24 letters, so gen_covers.py MUST scale each title's font down from that max based on its own character count, keeping it on a single line (never let it wrap -- the tagline/rule/byline below all sit at fixed offsets that assume a one-line title). This is not optional per-title tuning; it is a required part of applying this one calibration number correctly."
+  },
+
+  "spine": {
+    "reference_spine_width_px_at_300dpi": 168,
+    "series_name_font_px_at_300dpi": 56,
+    "diamond_font_px_at_300dpi": 12,
+    "title_font_px_at_300dpi": 62,
+    "imprint_line_font_px_at_300dpi": 56,
+    "adjacent_to_title_step_px": 6,
+    "gap_series_to_diamond_frac_of_panel_height": 0.019,
+    "gap_diamond_to_title_frac_of_panel_height": 0.007,
+    "gap_title_to_diamond_frac_of_panel_height": 0.010,
+    "gap_diamond_to_imprint_frac_of_panel_height": 0.035,
+    "measured_as": "cap-height of each rotated (writing-mode:vertical-rl) line, measured as its pixel WIDTH in the rendered image, at the reference's own 300dpi render -- these are FIXED ABSOLUTE PIXEL SIZES, not a fraction of spine width. Because every cover in this build renders at the same 300dpi as the reference, reusing these exact pixel counts reproduces the reference's true physical spine typography (in inches) on every title, regardless of that title's own spine width.",
+    "design_directive_2026_09_28": "House style, as of this date, going forward on EVERY title (not just the four-part study): the two spine lines immediately flanking the title -- the series name above it, the imprint line below it -- render one step smaller than the title itself, i.e. title_font_px_at_300dpi minus adjacent_to_title_step_px (62-6=56), not the small accent sizes originally measured off the Ephesians reference (series name 19px, imprint line 22px -- kept here only as history, no longer in force). This directive was worked out first as a gen_covers.py-only override on the four Part One-Four covers, then generalized here into calibration.json itself at the user's direct request so every future title inherits it automatically instead of needing its own override. The diamond size (12px) and the title size itself (62px) are unaffected. Ephesians' own already-printed cover was not rebuilt to match; this directive governs new and future builds.",
+    "critical_rule": "NEVER scale these sizes by a given title's own spine_px, and NEVER scale them by the series' narrowest spine_px either. Both were tried and both were wrong: scaling by each title's own width made the four volumes look inconsistent with each other (this series' spines range from 0.3175in to 0.585in from page-count alone); scaling everything down to the narrowest volume's width made the four consistent WITH EACH OTHER but smaller than the reference. Use these fixed pixel values unchanged on every title. Only clamp them down, per-title, as a safety backstop if a future title's own spine_px is ever narrower than title_font_px_at_300dpi (62) -- none of the current titles need this clamp.",
+    "construction_rule": "Each spine line MUST be its own element with writing-mode:vertical-rl; text-orientation:sideways, stacked by ordinary top-to-bottom flex-column flow. Do NOT assemble the five lines as one block in reading order and rotate the whole block 90 degrees -- that reliably produces a SIDE-BY-SIDE arrangement across the spine's width instead of a stack down its length, and looks superficially plausible enough to pass a casual glance before failing on real comparison."
+  }
+}

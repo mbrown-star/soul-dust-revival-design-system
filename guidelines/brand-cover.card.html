@@ -1,0 +1,67 @@
+<!-- @dsCard group="Brand" viewport="960x320" name="Brand Cover" subtitle="Ember, gold and ink blocks with rising dust motes; Anton wordmark" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<title>Soul Dust Revival</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Source+Serif+4:wght@400..700&family=Archivo:wght@400..700&display=swap">
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--surface-page); color:var(--text-primary); overflow:hidden; }
+  .cover { position:relative; height:320px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:320px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:320px; }
+  .slab { fill:var(--ember); }
+  .tint { fill:var(--gold); }
+  .deep { fill:var(--surface-inverted); }
+  .blk { rx:8; }
+  .mote-gold { fill:var(--gold); }
+  .mote-warm { fill:var(--parchment); }
+  .mote-ember { fill:var(--accent-ember); }
+  .words { position:absolute; left:24px; right:24px; bottom:24px; max-width:440px; }
+  .name { margin:0; font-family:var(--font-display); font-size:84px; line-height:.96; font-weight:600; color:var(--text-primary); }
+  .tag { margin:8px 0 0; font-family:var(--font-sans); font-size:14px; line-height:20px; color:var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 320" width="480" height="320">
+<!--
+  blocks      ember 120x200 bled off the top (the brand's one chromatic hue, largest — weighted by identity, not UI frequency) · gold 104x160 (the accent tint) · ink 180x190 bleeding off the right edge (the deep inverted surface) — ~49% of 480x320
+  arrangement one tall ember slab top-left, gold tint floating lower-center, ink deep block anchored right and bleeding off the edge — a staggered stack reading left to right, light to dark
+  pattern     dust motes: from the source's own hero animation (rising dust over a gold-to-ember-to-ink gradient) — small radius-full circles, dense and warm low over the ember/gold blocks, thinning and cooling (parchment-tinted) as they rise over the ink block
+  scales      block sides in space-4/space-8 multiples; corners radius-md (8px); motes sized 3-9px, a few per space-8 (32px) of rise
+-->
+<rect class="slab blk" x="16" y="-16" width="120" height="200" rx="8"/>
+<rect class="tint blk" x="152" y="96" width="104" height="160" rx="8"/>
+<rect class="deep blk" x="300" y="48" width="180" height="190" rx="8"/>
+<circle class="mote-gold" cx="48" cy="150" r="8"/>
+<circle class="mote-ember" cx="78" cy="120" r="6"/>
+<circle class="mote-gold" cx="110" cy="90" r="5"/>
+<circle class="mote-warm" cx="60" cy="70" r="4"/>
+<circle class="mote-gold" cx="95" cy="40" r="3"/>
+<circle class="mote-warm" cx="130" cy="20" r="3"/>
+<circle class="mote-gold" cx="185" cy="230" r="9"/>
+<circle class="mote-ember" cx="220" cy="200" r="6"/>
+<circle class="mote-gold" cx="205" cy="160" r="5"/>
+<circle class="mote-warm" cx="240" cy="130" r="4"/>
+<circle class="mote-gold" cx="190" cy="105" r="3"/>
+<circle class="mote-warm" cx="330" cy="220" r="7"/>
+<circle class="mote-gold" cx="370" cy="190" r="5"/>
+<circle class="mote-warm" cx="410" cy="160" r="6"/>
+<circle class="mote-gold" cx="440" cy="120" r="4"/>
+<circle class="mote-warm" cx="390" cy="95" r="3"/>
+<circle class="mote-warm" cx="350" cy="70" r="3"/>
+<circle class="mote-gold" cx="420" cy="50" r="2.5"/>
+<circle class="mote-warm" cx="360" cy="30" r="2.5"/>
+</svg>
+</div>
+<div class="words">
+<p class="name">Soul Dust<br>Revival</p>
+<p class="tag">Devotional studies built from the dust up.</p>
+</div>
+</div>
+</body>
+</html>
