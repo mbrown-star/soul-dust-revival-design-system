@@ -2,6 +2,10 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-01: cover requests ask for both inputs
+- Every cover request now starts by confirming the study's manuscript PDF and `SDR-cover-pipeline.zip` are in hand, asking for whichever is missing.
+- The pipeline bundles its own fonts (Liberation Serif, DejaVu Serif Condensed) so it renders identically in a Claude Chat sandbox.
+
 ## 2026-10-01: cover pipeline rebuilt
 - `gen_covers.py`, `render.py` and `to_pdf.py` rebuilt from the cover rules (the originals were never saved), and `verify_covers.py` generalized to every title. Proven by rebuilding The Ten Commandments (8.5x11) and 1 Peter (6x9): mean pixel difference about 4.5/255 against the shipped PDFs, text within 0-3px, identical page sizes; verify passes 37/37.
 - `calibration.json` gained `fixed_px_at_300dpi`: the back panel and the front's secondary lines are fixed pixel sizes on every trim, measured off the shipped covers. Spine sizes corrected to what the shipped covers actually use: DejaVu Serif Condensed, series 56px, title 54px, imprint 54px (the earlier 62px was an ink measurement). `WraparoundCover` updated to match.

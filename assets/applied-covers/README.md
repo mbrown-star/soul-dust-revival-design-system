@@ -33,6 +33,7 @@ The four-part study (*Out of the Dust*, *Formed and Sent*, *Confession & Repenta
 
 ## Building a cover
 
+0. **Gather the inputs.** Before starting any cover, make sure you have both the study's manuscript PDF and `SDR-cover-pipeline.zip` (this folder's scripts, fonts and hero photo). Ask for whichever is missing, and don't start without both.
 1. **Write the copy file.** Copy `titles/ten-commandments.json` (8.5x11) or `titles/1-peter.json` (6x9) to `titles/<key>.json` and fill in `trim`, `pages`, `ground` (the hex value from the register or `CoverBlendMottlePairings`), the front lines, the back hook, paragraphs and items, and `file` (the PDF name). Optional: `front.title_lines` for a two-line title, `spine.title` for a shortened spine title, and `front.journey`/`spine.journey` for the four-part study.
 2. **Generate:** `python3 gen_covers.py <key>` writes `build/<key>.html` and `build/manifest.json`, reading every size from `calibration.json`.
 3. **Render:** `python3 render.py <key>` writes `build/png/<key>.png` at exact print pixels.
