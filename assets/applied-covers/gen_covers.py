@@ -25,7 +25,11 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.join(BASE, "build")
 CAL = json.load(open(os.path.join(BASE, "calibration.json")))
 DPI = 300
-HERO = os.path.abspath(os.path.join(BASE, "..", "hero-source.png"))
+# The hero photo: ../hero-source.png in the design system, or hero-source.png beside this
+# script when the pipeline is used on its own (e.g. a Claude Chat project).
+HERO = next((p for p in (os.path.join(BASE, "..", "hero-source.png"), os.path.join(BASE, "hero-source.png"))
+             if os.path.exists(p)), os.path.join(BASE, "..", "hero-source.png"))
+HERO = os.path.abspath(HERO)
 
 GOLD = "#B08D2E"   # back kicker, "EACH WEEK INCLUDES", front theme line, spine series name
 GOLD2 = "#AD9A5F"  # keylines, publisher, diamonds, front kicker, tagline, rule, refs, imprint

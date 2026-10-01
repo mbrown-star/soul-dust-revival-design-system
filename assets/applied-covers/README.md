@@ -40,7 +40,7 @@ The four-part study (*Out of the Dust*, *Formed and Sent*, *Confession & Repenta
 5. **Look:** check the full cover and the back, front and spine crops in the PNG, especially back-cover overflow.
 6. **Export:** `python3 to_pdf.py <key>` writes `build/pdf/<file>` at the exact full-wrap size. Save it to the title's folder in Claude Code Covers with its build notes, then add the title to the register below and to the changelog.
 
-**Requirements:** Python 3 with `pip install playwright==1.56.0 pillow numpy reportlab` (Playwright uses the installed Chromium), plus the fonts Liberation Serif and DejaVu Serif Condensed (`fonts-liberation` and `fonts-dejavu-extra`). `render.py` stops if a font is missing rather than substituting one. The hero photo is `../hero-source.png`. The `build/` folder is scratch and isn't saved.
+**Requirements:** Python 3 with `pip install playwright==1.56.0 pillow numpy reportlab` (Playwright uses the installed Chromium), plus the fonts Liberation Serif and DejaVu Serif Condensed. Both are bundled in `fonts/`, and `render.py` installs them if they're missing, then stops if they still aren't available rather than substituting. The hero photo is `../hero-source.png`. The `build/` folder is scratch and isn't saved.
 
 **Proven against:** the rebuilt Ten Commandments and 1 Peter covers match the shipped PDFs (mean pixel difference about 4.5/255, text within 0-3px, identical page sizes). The four-part study's "A Journey" lines are supported but haven't been re-checked against those four shipped covers.
 
