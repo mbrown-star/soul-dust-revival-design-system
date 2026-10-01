@@ -1,6 +1,6 @@
 # Applied covers: the cover recipe
 
-How to build a Soul Dust Revival wraparound cover. This folder holds the rules (this file), the measured layout numbers (`calibration.json`), the automated check (`verify_covers.py`) and the reference cover every title is built to match (`SoulDust_Ephesians_Cover_5_dusk.pdf`). Finished covers are kept in the shared drive under [Claude Code Covers](https://drive.google.com/drive/folders/17VHHakHBc2b0LlbSSa_JYw1e3bshOl4M), not here.
+How to build a Soul Dust Revival wraparound cover. This folder holds the rules (this file), the measured layout numbers (`calibration.json`), the build pipeline (`gen_covers.py`, `render.py`, `verify_covers.py`, `to_pdf.py`), one copy file per title (`titles/`) and the reference cover every title is built to match (`SoulDust_Ephesians_Cover_5_dusk.pdf`). Finished covers are kept in the shared drive under [Claude Code Covers](https://drive.google.com/drive/folders/17VHHakHBc2b0LlbSSa_JYw1e3bshOl4M), not here.
 
 ## Trim, classification and spine
 
@@ -25,11 +25,24 @@ How to build a Soul Dust Revival wraparound cover. This folder holds the rules (
 - **Tagline:** must also fit on one line, because the rule below it sits at a fixed position. Shorten long manuscript subtitles.
 - **Back panel:** kicker, a one-sentence italic hook, two short paragraphs, gold "EACH WEEK INCLUDES" (or "EACH DAY INCLUDES" for the devotional) with diamond bullets, the centered anchor-verse pull-quote and a two-line footer. **Watch the total length:** a long hook, or a normal hook plus two full paragraphs, pushes the pull-quote into the footer, especially on the shorter 6x9 panel. Keep the hook under ~75 characters with no embedded quotation marks.
 - **Spine:** each line is its **own** `writing-mode: vertical-rl; text-orientation: sideways` element, stacked in a flex column. Never rotate one assembled block, which puts the lines side by side. Stack: series name / diamond / title / diamond / imprint ("THE SOUL DUST TEAM").
-- **Spine sizes are fixed pixels at 300dpi:** title 62px, series name and imprint 56px (title minus 6px, the house style since 2026-09-28), diamonds 12px. **Never scale them by a title's own spine width, or by the narrowest spine in a series.** Only clamp them down if a spine is ever narrower than 62px. If a spine title is too long to fit, use its first line only (as on the 365-Day Journey).
+- **Spine type is DejaVu Serif Condensed in fixed pixels at 300dpi:** series name 56px regular, title 54px bold, imprint 54px regular, diamonds 12px (as rendered on every shipped cover since the 2026-09-28 directive). **Never scale them by a title's own spine width, or by the narrowest spine in a series.** Only clamp them down if a spine is ever narrower than 56px. If a spine title is too long to fit, use its first line only (as on the 365-Day Journey).
 
 ## Series-specific
 
 The four-part study (*Out of the Dust*, *Formed and Sent*, *Confession & Repentance*, *Life*) adds "A Journey" on the front between the diamonds and the kicker, and "A Journey Part [N]" on the spine between the first diamond and the title. These are constants in the build script only, not in `calibration.json`, and no other title gets them unless asked.
+
+## Building a cover
+
+1. **Write the copy file.** Copy `titles/ten-commandments.json` (8.5x11) or `titles/1-peter.json` (6x9) to `titles/<key>.json` and fill in `trim`, `pages`, `ground` (the hex value from the register or `CoverBlendMottlePairings`), the front lines, the back hook, paragraphs and items, and `file` (the PDF name). Optional: `front.title_lines` for a two-line title, `spine.title` for a shortened spine title, and `front.journey`/`spine.journey` for the four-part study.
+2. **Generate:** `python3 gen_covers.py <key>` writes `build/<key>.html` and `build/manifest.json`, reading every size from `calibration.json`.
+3. **Render:** `python3 render.py <key>` writes `build/png/<key>.png` at exact print pixels.
+4. **Verify:** `python3 verify_covers.py` must exit 0.
+5. **Look:** check the full cover and the back, front and spine crops in the PNG, especially back-cover overflow.
+6. **Export:** `python3 to_pdf.py <key>` writes `build/pdf/<file>` at the exact full-wrap size. Save it to the title's folder in Claude Code Covers with its build notes, then add the title to the register below and to the changelog.
+
+**Requirements:** Python 3 with `pip install playwright==1.56.0 pillow numpy reportlab` (Playwright uses the installed Chromium), plus the fonts Liberation Serif and DejaVu Serif Condensed (`fonts-liberation` and `fonts-dejavu-extra`). `render.py` stops if a font is missing rather than substituting one. The hero photo is `../hero-source.png`. The `build/` folder is scratch and isn't saved.
+
+**Proven against:** the rebuilt Ten Commandments and 1 Peter covers match the shipped PDFs (mean pixel difference about 4.5/255, text within 0-3px, identical page sizes). The four-part study's "A Journey" lines are supported but haven't been re-checked against those four shipped covers.
 
 ## Before delivery
 

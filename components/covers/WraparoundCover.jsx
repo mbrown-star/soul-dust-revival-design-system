@@ -28,8 +28,8 @@ const CAL = {
   // scale these by a title's own spine width or the series' narrowest spine width.
   // Scaled here only by the preview's own height vs. the 300dpi reference height,
   // which is the one scaling that keeps every title's spine text physically identical.
-  // series/team = title minus one 6px step (calibration.json, 2026-09-28 design directive).
-  spine: { series: 56, dia: 12, title: 62, team: 56 },
+  // As rendered on the shipped covers (calibration.json spine, rebuilt 2026-10-01).
+  spine: { series: 56, dia: 12, title: 54, team: 54 },
 };
 
 // Same single-line-fit rule as gen_covers.py's f_title_fit: capped at the

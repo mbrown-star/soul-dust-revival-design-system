@@ -7,7 +7,7 @@ It reads the same calibrated fractions and constants as `assets/applied-covers/c
 Two invariants are built in and cannot be defeated by props:
 
 - **The front-cover title never wraps to a second line.** Its font size is solved from the title's own character count (capped at the calibrated maximum), the same fit formula `gen_covers.py` uses.
-- **Spine text is sized in fixed pixels at the calibration's own reference resolution, scaled only by the preview's overall height — never by that title's own spine width.** Every title's spine text renders at the same physical size: title 62px, series name and imprint 56px, diamonds 12px at 300dpi. Pass two covers with very different page counts side by side (see the preview) and their spine type should look identical in size.
+- **Spine text is sized in fixed pixels at the calibration's own reference resolution, scaled only by the preview's overall height — never by that title's own spine width.** Every title's spine text renders at the same physical size: series name 56px, title and imprint 54px, diamonds 12px at 300dpi (DejaVu Serif Condensed on the print covers). Pass two covers with very different page counts side by side (see the preview) and their spine type should look identical in size.
 
 ## What this component does NOT do
 
