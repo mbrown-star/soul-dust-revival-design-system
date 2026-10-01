@@ -16,14 +16,16 @@ cause (gen_covers.py or calibration.json, in that order of suspicion) and re-run
 pipeline, never hand-patch the PNG or the PDF.
 
 Usage: python3 verify_covers.py
+Reads build/manifest.json and build/png/*.png, as written by gen_covers.py and render.py.
 """
 import json, os, sys
 import numpy as np
 from PIL import Image
 
 BASE = os.path.dirname(os.path.abspath(__file__))
+BUILD = os.path.join(BASE, "build")
 CAL = json.load(open(f"{BASE}/calibration.json"))
-manifest = json.load(open(f"{BASE}/manifest.json"))
+manifest = json.load(open(f"{BUILD}/manifest.json"))
 
 GOLD = (176, 141, 46)
 GOLD2 = (173, 154, 95)
@@ -51,7 +53,7 @@ print("=" * 70)
 
 for m in manifest:
     key = m["key"]
-    png_path = f"{BASE}/png/{key}.png"
+    png_path = f"{BUILD}/png/{key}.png"
     if not os.path.exists(png_path):
         failures.append(f"[{key}] missing rendered PNG at {png_path} -- run render.py first")
         continue
@@ -95,31 +97,24 @@ for m in manifest:
         mo = re.search(re.escape(selector) + r"\{[^}]*font-size:(\d+)px", html_src)
         return int(mo.group(1)) if mo else None
 
-    # "A Journey [Number]" spine line, and the adjacent-to-title size for it and the imprint
-    # line: both 4-part-only, added after the original nine build passes -- not part of
-    # calibration.json (Ephesians itself never had "A Journey", and its own imprint line
-    # stays at calibration.json's smaller size). These two literals must stay in sync with
-    # gen_covers.py's own SPINE_ADJACENT_STEP_PX constant, the same way the CAL-sourced
-    # targets stay in sync with calibration.json. The imprint line's target below is
-    # therefore SPINE_ADJACENT_PX, not calibration.json's imprint_line_font_px_at_300dpi --
-    # that CAL value is still what Ephesians itself and any future Ephesians-matched title
-    # should use, just not these four.
-    SPINE_ADJACENT_STEP_PX = 6
-    SPINE_ADJACENT_PX = _SP["title_font_px_at_300dpi"] - SPINE_ADJACENT_STEP_PX
-    # Per direct follow-up request, the series-name line ("SOUL DUST REVIVAL") now matches
-    # the imprint line's size too -- SPINE_ADJACENT_PX, not calibration.json's own (smaller)
-    # series_name_font_px_at_300dpi. Same 4-part-only boundary as everything else here:
-    # calibration.json and Ephesians' own spine keep the original series-name size.
+    # Every spine size comes straight from calibration.json (the 2026-09-28 directive made the
+    # series-name and imprint lines house style, so they're no longer Part-study overrides).
+    # "A Journey Part [N]" exists only on titles whose spec sets it (manifest "journey").
+    has_journey = m.get("journey", False)
+    SPINE_ADJACENT_PX = _SP["title_font_px_at_300dpi"] - _SP["adjacent_to_title_step_px"]
     spine_css = {
-        "series name": (css_font_size(".sp-series"), SPINE_ADJACENT_PX),
+        "series name": (css_font_size(".sp-series"), _SP["series_name_font_px_at_300dpi"]),
         "title": (css_font_size(".sp-title"), _SP["title_font_px_at_300dpi"]),
-        "imprint line": (css_font_size(".sp-team"), SPINE_ADJACENT_PX),
+        "imprint line": (css_font_size(".sp-team"), _SP["imprint_line_font_px_at_300dpi"]),
         "diamond": (css_font_size(".sp-dia"), _SP["diamond_font_px_at_300dpi"]),
-        "journey": (css_font_size(".sp-journey"), SPINE_ADJACENT_PX),
     }
-    spine_narrow_clamp = spine_px - round(0.90 * 300 / 300 * 8) < max(
-        _SP["title_font_px_at_300dpi"],
-        _SP["diamond_font_px_at_300dpi"], SPINE_ADJACENT_PX)
+    if has_journey:
+        spine_css["journey"] = (css_font_size(".sp-journey"), SPINE_ADJACENT_PX)
+    if not m.get("spine_text", True):
+        spine_css = {}
+    spine_narrow_clamp = spine_px - 8 < max(
+        _SP["title_font_px_at_300dpi"], _SP["series_name_font_px_at_300dpi"],
+        _SP["imprint_line_font_px_at_300dpi"], _SP["diamond_font_px_at_300dpi"])
     for label, (actual, target) in spine_css.items():
         check(actual == target or (spine_narrow_clamp and actual is not None and actual <= target),
               f"[{key}] spine '{label}' CSS font-size uses the fixed calibration constant verbatim",
@@ -247,37 +242,34 @@ for m in manifest:
     title_clusters = clusters_for(cream_mask)
     gold2_clusters = clusters_for(gold2_mask)
 
-    # 4-part-only: "A Journey [Number]" is the same gold2 color as the diamonds and the
-    # imprint line, so it adds a 4th gold2 cluster (dia1, journey, dia2, imprint) between
-    # the first diamond and the title.
-    ok_shape = len(series_clusters) == 1 and len(title_clusters) == 1 and len(gold2_clusters) == 4
+    # The journey line (four-part study only) is the same gold2 as the diamonds and imprint
+    # line, so it adds a gold2 cluster between the first diamond and the title.
+    if not m.get("spine_text", True):
+        continue
+    want_gold2 = 4 if has_journey else 3
+    ok_shape = len(series_clusters) == 1 and len(title_clusters) == 1 and len(gold2_clusters) == want_gold2
     check(ok_shape,
-          f"[{key}] spine has all 6 stacked text elements (1 series + 1 journey + 1 title + 2 diamonds + 1 imprint)",
-          f"series={len(series_clusters)}, title={len(title_clusters)}, gold2(diamonds+journey+imprint)={len(gold2_clusters)} "
+          f"[{key}] spine has every stacked text element (series, diamonds, title, imprint{', journey' if has_journey else ''})",
+          f"series={len(series_clusters)}, title={len(title_clusters)}, gold2={len(gold2_clusters)} (want {want_gold2}) "
           f"-- series={series_clusters} title={title_clusters} gold2={gold2_clusters}")
 
     if ok_shape:
-        dia1, journey, dia2, team = gold2_clusters
+        if has_journey:
+            dia1, journey, dia2, team = gold2_clusters
+        else:
+            dia1, dia2, team = gold2_clusters
         elements = [
-            ("series name", series_clusters[0], gold_mask, SPINE_ADJACENT_PX),
-            ("diamond (upper)", dia1, gold2_mask, _SP["diamond_font_px_at_300dpi"]),
-            ("journey", journey, gold2_mask, SPINE_ADJACENT_PX),
-            ("title", title_clusters[0], cream_mask, _SP["title_font_px_at_300dpi"]),
-            ("diamond (lower)", dia2, gold2_mask, _SP["diamond_font_px_at_300dpi"]),
-            ("imprint line", team, gold2_mask, SPINE_ADJACENT_PX),
+            ("series name", series_clusters[0], gold_mask),
+            ("diamond (upper)", dia1, gold2_mask),
+            ("title", title_clusters[0], cream_mask),
+            ("diamond (lower)", dia2, gold2_mask),
+            ("imprint line", team, gold2_mask),
         ]
-        # Rendered ink-pixel width is recorded per element and per title so the cross-title
-        # consistency check below can compare them -- NOT compared to calibration.json's
-        # absolute px number here, since that number was measured off the reference PDF's own
-        # rendering pipeline (PyMuPDF), and a serif face's visible ink cap-height as a
-        # fraction of its nominal CSS font-size is not the same fraction across two different
-        # rendering engines even when the CSS is byte-for-byte correct (confirmed empirically:
-        # Chromium renders this build's fonts at roughly 0.65-0.7x the PDF's own ink ratio).
-        # The check that DOES belong here, and that the source-level check above cannot catch
-        # on its own, is that every title's ink width for a given element is the same as every
-        # other title's -- i.e. nothing about a specific title's own dimensions leaked back
-        # into how large its spine text actually renders.
-        for label, (top_c, bot_c), mask, target in elements:
+        if has_journey:
+            elements.insert(2, ("journey", journey, gold2_mask))
+        # Rendered ink width per element and title, compared ACROSS titles below: nothing about a
+        # title's own spine width may leak into how large its spine type renders.
+        for label, (top_c, bot_c), mask in elements:
             measured = width_of(top_c, bot_c, mask)
             globals().setdefault("_spine_ink_widths", {}).setdefault(label, {})[key] = measured
 

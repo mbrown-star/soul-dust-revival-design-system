@@ -1,0 +1,29 @@
+{
+  "key": "ten-commandments",
+  "file": "Soul_Dust_Revival_The_Ten_Commandments_Cover.pdf",
+  "trim": "8.5x11",
+  "pages": 183,
+  "ground": "#2C211E",
+  "front": {
+    "kicker": "A STUDY OF",
+    "title": "The Ten Commandments",
+    "tagline": "Fulfilled and Empowered",
+    "theme": "THE LAW KEPT · THE DEBT PAID",
+    "kind": "A TWELVE-WEEK TOPICAL STUDY"
+  },
+  "back": {
+    "kicker": "A TWELVE-WEEK TOPICAL STUDY",
+    "hook": "The Law was never a ladder to climb. It was a mirror pointing to Christ.",
+    "paragraphs": [
+      "Ten commandments, spoken from a mountain wrapped in fire, carved in stone, and still standing in your Bible. Most men carry one of two lies about them -- that keeping them earns God's favor, or that Jesus retired them at the cross. Over twelve weeks this study walks each command in its full weight and glory, then shows how Christ fulfilled it and how His Spirit makes it walkable, letting a Greek or Hebrew word sharpen the verse you just read.",
+      "The Law was never the ladder to God -- it was the mirror that showed you needed one. Every command you broke, Christ kept; every sentence it pronounced, He paid, nailing the whole indictment to His cross. Ten for ten, across an entire life, He produced the record you could not, and gave it to you. Come as you are, clinging and all, and let Him lift your eyes off the ten mirrors and onto the one Savior they were always pointing toward."
+    ],
+    "items": [
+      "A Scripture Study Dive essay in four parts, with the week's passage in full from Exodus 20 and its New Testament fulfillment",
+      "Reflection passages from Scripture, each with one question and a Hebrew or Greek word study",
+      "A life-application section with five concrete practices and a daily prayer",
+      "A Bottom Line and a closing benediction, Lift Up Your Eyes"
+    ]
+  },
+  "spine": {"title": "The Ten Commandments"}
+}

@@ -2,6 +2,15 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-01: cover pipeline rebuilt
+- `gen_covers.py`, `render.py` and `to_pdf.py` rebuilt from the cover rules (the originals were never saved), and `verify_covers.py` generalized to every title. Proven by rebuilding The Ten Commandments (8.5x11) and 1 Peter (6x9): mean pixel difference about 4.5/255 against the shipped PDFs, text within 0-3px, identical page sizes; verify passes 37/37.
+- `calibration.json` gained `fixed_px_at_300dpi`: the back panel and the front's secondary lines are fixed pixel sizes on every trim, measured off the shipped covers. Spine sizes corrected to what the shipped covers actually use: DejaVu Serif Condensed, series 56px, title 54px, imprint 54px (the earlier 62px was an ink measurement). `WraparoundCover` updated to match.
+- Copy files for both titles are in `assets/applied-covers/titles/`.
+
+## 2026-10-01: article text and heading case
+- Anton titles stay uppercase, but headings inside long-form articles (lessons, blog, leader resources) now use normal case.
+- Article text uses brand colors: ink body, headings, links and quotes, moss secondary text, ember link underlines and quote borders. Previously the web app used Tailwind's default grey.
+
 ## 2026-10-01: ink focus ring
 - `focus-ring` changed from gold to ink: gold is only 1.39:1 on parchment, below the 3:1 minimum for focus indicators. Added `focus-ring-on-dark` (gold) for ink and dusk sections. Components that use `focus-ring` pick this up automatically.
 

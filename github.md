@@ -1,5 +1,11 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: cover pipeline
+date: 2026-10-01
+- Rebuilt `gen_covers.py`, `render.py`, `to_pdf.py`; generalized `verify_covers.py`; copy files in `assets/applied-covers/titles/`. Proven against the shipped Ten Commandments and 1 Peter PDFs.
+- `calibration.json`: new `fixed_px_at_300dpi` section; spine sizes corrected (DejaVu Serif Condensed; series 56, title 54, imprint 54). `WraparoundCover` updated to match.
+- Readme: article text colors; article headings in normal case.
+
 ## Sync from Claude design system: focus ring
 date: 2026-10-01
 - `focus-ring` is now ink; added `focus-ring-on-dark` (gold) for ink/dusk sections.
