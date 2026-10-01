@@ -1,6 +1,7 @@
 :root{
-/* Fraunces — display/headlines. Source Serif 4 — body (long-form reading is this app's job). Archivo — nav/UI. */
---font-display:"Fraunces",Georgia,serif;
+/* Anton — display/headlines and the wordmark (single weight, condensed; set uppercase, tight leading ~0.92,
+   rendered at its native 400 — it has no 600). Source Serif 4 — long-form reading. Archivo — nav/UI. */
+--font-display:"Anton","Archivo",sans-serif;
 --font-serif:"Source Serif 4",Georgia,serif;
 --font-sans:"Archivo",system-ui,-apple-system,sans-serif;
 --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
