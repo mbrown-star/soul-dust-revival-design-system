@@ -9,6 +9,7 @@ source: "Soul Dust Revival" design system in Claude (the master copy). This repo
 - Inferred tokens approved; `ember-700` `#b8501f` added.
 - `WraparoundCover` spine series/imprint 19/22px → 56px.
 - Brand marks regenerated in real Anton: SVG with outlined text, plus 2x and 4x PNGs.
+- Bundle components listed in group order (Forms, Feedback, Navigation, Data display, Covers). The Claude README got a by-group table, since its Components tab shows no group headings.
 
 ## Sync from Claude design system
 date: 2026-10-01

@@ -5,7 +5,7 @@ Newest first. Dates before 2026-10-01 are approximate, reconstructed from the ol
 ## 2026-10-01: reorganization
 - Finished cover PDFs moved to the shared drive (*Claude Code Covers*, one folder per title with its build notes). Only the Ephesians reference stays here, in `applied-covers`. Duplicate files outside `project/` removed.
 - READMEs rewritten as current rules. Their build history moved into this changelog.
-- Components regrouped: Foundations, Forms, Feedback, Navigation, Data display, Covers, Pages, Archive (old homepage drafts).
+- Components regrouped: Foundations, Forms, Feedback, Navigation, Data display, Covers, Pages, Archive (old homepage drafts). The Components tab doesn't show group headings, so the README carries a by-group table and the live components are listed in group order.
 - Production grounds renamed so every name is unique: 28 Ash → **Soot**, 33 Loam → **Peat**, 30 Oxblood → **Garnet**, 32 Ember → **Smolder**, 36 Rust → **Tannin**. Hex values and images unchanged. Files renamed to match.
 - The four inferred tokens (`surface-fill`, `text-tertiary`, `state-success`, `state-warning`) approved as-is.
 - Added `ember-700` `#b8501f` for small accent text, since ember and gold are too light for text on parchment.
