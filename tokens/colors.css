@@ -7,7 +7,7 @@
 --parchment:#f7ecd8;  /* sunset "paper": base page background */
 --ember:#e2762c;      /* 2.62:1 — the one chromatic accent (Ember 500). Buttons, fills, large display type only */
 --ember-700:#b8501f;  /* 4.27:1 — accent text and links at large sizes (18px+, or 14px+ bold); deep end of the wordmark gradient */
---gold:#f6c453;       /* 1.39:1 — focus ring and highlights (Gold 500). Never as text */
+--gold:#f6c453;       /* 1.39:1 — highlights and the focus ring on dark grounds (Gold 500). Never as text or a focus ring on light grounds */
 --moss:#6b5344;       /* 6.09:1 — secondary text and muted UI (sunset Dusk 500, in the old moss role) */
 
 /* Semantic aliases used throughout components/pages */
@@ -24,7 +24,8 @@
 --text-link:var(--ink);
 --accent-ember:var(--ember);
 --accent-gold:var(--gold);
---focus-ring:var(--gold);
+--focus-ring:var(--ink);           /* 15.8:1 on parchment — focus outline on light grounds */
+--focus-ring-on-dark:var(--gold);   /* 11.4:1 on ink — focus outline on ink/dusk sections */
 --state-error:#a8301c;             /* 5.78:1 — error text; pair with a word or icon, never color alone */
 --state-error-strong:var(--state-error);/* used by the admin block editor's Delete link */
 --state-success:#3b5a2b;                /* muted forest green, 6.69:1 */

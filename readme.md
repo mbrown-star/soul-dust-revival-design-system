@@ -21,12 +21,12 @@ The design system for **Soul Dust Revival**, a Psalm 119:25 devotional ministry 
 
 ## Visual foundations
 
-- **Color: the sunset palette.** Ink `#1a120c` on parchment `#f7ecd8`. Dusk `#3a281c` for deep sections and footers, moss `#6b5344` for secondary text. **Ember `#e2762c`** is the one chromatic accent and **gold `#f6c453`** the focus ring and highlight.
-- **Contrast rule:** ember (2.62:1) and gold (1.39:1) never carry small text on parchment. Use them for buttons, fills, focus rings and large display type. For small accent text (links, inline emphasis) use **`ember-700` `#b8501f`** (4.27:1, so large text only: 18px+, or 14px+ bold), and use ink or moss for body copy.
+- **Color: the sunset palette.** Ink `#1a120c` on parchment `#f7ecd8`. Dusk `#3a281c` for deep sections and footers, moss `#6b5344` for secondary text. **Ember `#e2762c`** is the one chromatic accent and **gold `#f6c453`** the highlight.
+- **Contrast rule:** ember (2.62:1) and gold (1.39:1) never carry small text on parchment. Use them for buttons, fills and large display type. For small accent text (links, inline emphasis) use **`ember-700` `#b8501f`** (4.27:1, so large text only: 18px+, or 14px+ bold), and use ink or moss for body copy.
 - **Type:** **Anton** for display (headlines, hero, wordmark): uppercase, leading ~0.92, native weight 400, often gradient-clipped ember→gold. **Source Serif 4** for reading (lessons, blog). **Archivo** for UI (buttons, labels, nav, forms), with semibold headings. All three load from Google Fonts.
 - **Spacing:** 4px-based scale. Columns are narrow and centered: 24rem login, 32rem admin forms, 36rem checkout, 42rem lesson reading, 56rem admin shell.
 - **Borders over shadows:** 1px `border-default` and 8px corners on cards, fields, dividers and buttons. The only shadow is `shadow-popover`, on the admin's one popover menu.
-- **Focus:** every interactive element gets a 2px gold outline with a 2px offset (WCAG 2.4.7). Never remove it.
+- **Focus:** every interactive element gets a 2px outline with a 2px offset (WCAG 2.4.7). Use `focus-ring` (ink) on light grounds (15.8:1 on parchment) and `focus-ring-on-dark` (gold) on ink and dusk sections (11.4:1 on ink). Never use gold on parchment, where it's only 1.39:1. Never remove the ring.
 - **Motion:** functional only (progress-bar fill, hover/focus transitions) and always honors `prefers-reduced-motion`. The hero's rising dust motes are the one decorative motion.
 - **App backgrounds** are flat parchment or a light fill. Gradients, photography and texture belong to the marketing hero and the book covers.
 

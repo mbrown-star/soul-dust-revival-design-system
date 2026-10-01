@@ -1,5 +1,9 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: focus ring
+date: 2026-10-01
+- `focus-ring` is now ink; added `focus-ring-on-dark` (gold) for ink/dusk sections.
+
 ## Sync from Claude design system: error color
 date: 2026-10-01
 - `state-error` is now `#a8301c` (5.78:1 on parchment), replacing ember, which fails as text.
