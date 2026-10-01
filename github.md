@@ -1,5 +1,9 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: cover-request rule
+date: 2026-10-01
+- Cover requests confirm the study's manuscript PDF and `SDR-cover-pipeline.zip` before starting (readme "How we work", applied-covers README step 0, changelog).
+
 ## Sync from Claude design system: cover pipeline
 date: 2026-10-01
 - Rebuilt `gen_covers.py`, `render.py`, `to_pdf.py`; generalized `verify_covers.py`; copy files in `assets/applied-covers/titles/`. Proven against the shipped Ten Commandments and 1 Peter PDFs.
