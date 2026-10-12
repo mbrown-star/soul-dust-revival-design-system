@@ -2,6 +2,15 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-10: Revive Me cover
+- Revive Me cover added: single-volume hardcover, 6x9, 232pp, ground Ochre `#3e2c0e`. Spine 0.711in and board/wrap/hinge geometry come from KDP's hardcover calculator, not the pages x 0.0025in paperback formula.
+- No copy file: it was built without the pipeline zip (from the John covers as references), so it can't be rebuilt from `titles/` yet. A hardcover mode in `gen_covers.py` is still to do.
+
+## 2026-10-06: 1 Timothy and James covers
+- 1 Timothy cover added: Book Study, 6x9, 203pp, ground Gunmetal `#323232`. Copy file `titles/1-timothy.json`.
+- James cover added: Book Study, 6x9, 202pp, ground Coal `#1b1b1b`. Copy file `titles/james.json`.
+- Both rebuild from the copy files and pass `verify_covers.py` (16/16). Their Drive build notes say they were built with a locally patched pipeline (2026-10-02 directives: no back-panel footer, bottom pad 0.12, `six_by_nine_back_tightening` in `calibration.json`) that isn't saved here yet, so a rebuild from this folder may differ slightly from the shipped PDFs.
+
 ## 2026-10-01: cover requests ask for both inputs
 - Every cover request now starts by confirming the study's manuscript PDF and `SDR-cover-pipeline.zip` are in hand, asking for whichever is missing.
 - The pipeline bundles its own fonts (Liberation Serif, DejaVu Serif Condensed) so it renders identically in a Claude Chat sandbox.
