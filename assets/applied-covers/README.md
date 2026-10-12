@@ -54,6 +54,7 @@ Render → **`verify_covers.py` must exit 0** (it checks keyline insets, title/t
 | Title | Type | Trim | Pages | Spine | Ground |
 |---|---|---|---|---|---|
 | 1 Peter | Book Study | 6x9 | 189 | 0.4725in | Soot `#2a2a26` |
+| 1 Timothy: Grace Abounding in the Dust | Book Study | 6x9 | 203 | 0.5075in | Gunmetal `#323232` |
 | A 365-Day Journey Through the Bible | 365-Day Devotional | 6x9 | 371 | 0.9275in | Slate `#26302f` |
 | Benedictions, Blessings & Doxologies: A Scriptural Catalog | Topical Study | 8.5x11 | 14 | blank spine | Navy `#1e2733` |
 | Colossians: The All-Sufficient Christ | Book Study | 6x9 | 201 | 0.5025in | Regal `#211b47` |
@@ -66,12 +67,14 @@ Render → **`verify_covers.py` must exit 0** (it checks keyline insets, title/t
 | Formed and Sent (Part Two) | Topical Study | 8.5x11 | 234 | 0.585in | Iron `#23282b` |
 | Galatians: Freed from the Dust by Grace Alone | Book Study | 6x9 | 189 | 0.4725in | Bark `#2e2117` |
 | In Christ: The Blessings and Benefits of Being in Christ | Topical Study | 8.5x11 | 128 | 0.32in | Clay `#3a2420` |
+| James: More Grace for the Dust | Book Study | 6x9 | 202 | 0.505in | Coal `#1b1b1b` |
 | Law and Gospel: The End of Performance, the Riches of Faith | Topical Study | 8.5x11 | 165 | 0.4125in | Stone `#33383a` |
 | Life (Part Four) | Topical Study | 8.5x11 | 165 | 0.4125in | Deep-pine `#1f2f2a` |
 | Out of the Dust (Part One) | Topical Study | 8.5x11 | 219 | 0.5475in | Soil `#241a12` |
 | Philippians: Joy from the Dust in Christ Alone | Book Study | 6x9 | 178 | 0.445in | Char `#1c1611` |
 | Prayer | Topical Study | 8.5x11 | 185 | 0.4625in | Smolder `#3d1c0c` |
 | Promise, Struggle, Exile, Providence: A Study in Genesis 18–50 | Topical Study | 8.5x11 | 187 | 0.4675in | Basalt `#2a2530` |
+| Revive Me: A Journey Out of the Dust | Book (single-volume hardcover) | 6x9 | 232 | 0.711in (KDP hardcover) | Ochre `#3e2c0e` |
 | The Gospel | Topical Study | 8.5x11 | 157 | 0.3925in | Garnet `#2e1013` |
 | The Holy Spirit | Topical Study | 8.5x11 | 116 | 0.29in | Deep Teal `#12302c` |
 | The Sermon on the Mount: Seeing Your Sin, and the Sufficiency of Christ | Topical Study | 8.5x11 | 163 | 0.4075in | Storm `#34383e` |

@@ -1,5 +1,13 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: 1 Timothy, James and Revive Me covers
+date: 2026-10-12
+source: "Soul Dust Revival" design system in Claude (daily sync from Claude Code)
+- `CHANGELOG.md`: copied verbatim (2026-10-06 and 2026-10-10 entries).
+- `assets/applied-covers/README.md`: register rows for 1 Timothy, James and Revive Me (hardcover, no copy file).
+- `assets/applied-covers/titles/1-timothy.json` and `james.json` added. Both rebuild with `gen_covers.py` + `render.py` and pass `verify_covers.py` (16/16). Drive PDFs were not in the folders' file listings, so no pixel comparison was made.
+- No token, font or component changes; the web app needed no update.
+
 ## Sync from Claude design system: cover-request rule
 date: 2026-10-01
 - Cover requests confirm the study's manuscript PDF and `SDR-cover-pipeline.zip` before starting (readme "How we work", applied-covers README step 0, changelog).

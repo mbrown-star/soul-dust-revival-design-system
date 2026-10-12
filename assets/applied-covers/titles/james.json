@@ -1,0 +1,32 @@
+{
+  "key": "james",
+  "file": "Soul_Dust_Revival_James_Cover.pdf",
+  "trim": "6x9",
+  "pages": 202,
+  "ground": "#1B1B1B",
+  "front": {
+    "kicker": "A STUDY OF",
+    "title": "James",
+    "tagline": "More Grace for the Dust",
+    "theme": "FROM DUST TO A LIVING FAITH",
+    "kind": "A TWELVE-WEEK BOOK STUDY"
+  },
+  "back": {
+    "kicker": "A TWELVE-WEEK BOOK STUDY",
+    "hook": "Grace runs to the low ground the way water does.",
+    "paragraphs": [
+      "Most men read James as a list of orders. But before James asks you to do one thing, he tells you what God has done: wisdom given without reproach, a new birth by the word of truth, and four words at the heart of the letter — he gives more grace.",
+      "Twelve weeks walk James from the testing ground to the brother brought home. The works he calls for are not the price of a living faith. They are its breath."
+    ],
+    "items": [
+      "A Scripture Study Dive essay",
+      "The full passage in the World English Bible",
+      "Five Greek word studies, each with a Live It response",
+      "Five Life Application practices and a daily prayer",
+      "A Bottom Line and a “Lift Up Your Eyes” benediction"
+    ]
+  },
+  "spine": {
+    "title": "James"
+  }
+}
