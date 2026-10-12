@@ -1,5 +1,11 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: John covers, Revive Me page count
+date: 2026-10-12
+- Added `titles/john-part-1.json` to `john-part-4.json`, register rows (Blue-grey `#385569`, approximate) and a changelog entry. All four rebuild and pass `verify_covers.py` (69/69).
+- Revive Me page count corrected 232 → 234 (spine/wrap still need a KDP recheck for 234pp).
+- `CHANGELOG.md` and `assets/applied-covers/README.md` copied verbatim from the design system.
+
 ## Sync from Claude design system: 1 Timothy, James and Revive Me covers
 date: 2026-10-12
 source: "Soul Dust Revival" design system in Claude (daily sync from Claude Code)

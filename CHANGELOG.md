@@ -2,8 +2,12 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-12: John covers added, Revive Me page count corrected
+- John: That You May Believe, Parts One to Four added: Book Study, 6x9, ground Blue-grey `#385569` (approximate, read off the rendered back panel; not a named ground), 211 / 215 / 212 / 210pp, spines 0.5275 / 0.5375 / 0.53 / 0.525in. Copy files `titles/john-part-1.json` to `john-part-4.json`, transcribed from the delivered covers (no text layer) and confirmed by Matt. They rebuild and pass `verify_covers.py` (69/69), but the shipped PDFs were built outside this pipeline, so a rebuild may differ from them.
+- Revive Me page count corrected from 232 to 234, per its interior PDF. The 0.711in spine and 14.2867in x 10.4167in wrap still match the 232-page calculation, so they need rechecking against KDP's hardcover calculator for 234pp before upload.
+
 ## 2026-10-10: Revive Me cover
-- Revive Me cover added: single-volume hardcover, 6x9, 232pp, ground Ochre `#3e2c0e`. Spine 0.711in and board/wrap/hinge geometry come from KDP's hardcover calculator, not the pages x 0.0025in paperback formula.
+- Revive Me cover added: single-volume hardcover, 6x9, 234pp (corrected 2026-10-12; originally logged as 232), ground Ochre `#3e2c0e`. Spine 0.711in and board/wrap/hinge geometry come from KDP's hardcover calculator, not the pages x 0.0025in paperback formula.
 - No copy file: it was built without the pipeline zip (from the John covers as references), so it can't be rebuilt from `titles/` yet. A hardcover mode in `gen_covers.py` is still to do.
 
 ## 2026-10-06: 1 Timothy and James covers

@@ -68,16 +68,22 @@ Render → **`verify_covers.py` must exit 0** (it checks keyline insets, title/t
 | Galatians: Freed from the Dust by Grace Alone | Book Study | 6x9 | 189 | 0.4725in | Bark `#2e2117` |
 | In Christ: The Blessings and Benefits of Being in Christ | Topical Study | 8.5x11 | 128 | 0.32in | Clay `#3a2420` |
 | James: More Grace for the Dust | Book Study | 6x9 | 202 | 0.505in | Coal `#1b1b1b` |
+| John: That You May Believe — Part One | Book Study | 6x9 | 211 | 0.5275in | Blue-grey `#385569` (approx.) |
+| John: That You May Believe — Part Two | Book Study | 6x9 | 215 | 0.5375in | Blue-grey `#385569` (approx.) |
+| John: That You May Believe — Part Three | Book Study | 6x9 | 212 | 0.53in | Blue-grey `#385569` (approx.) |
+| John: That You May Believe — Part Four | Book Study | 6x9 | 210 | 0.525in | Blue-grey `#385569` (approx.) |
 | Law and Gospel: The End of Performance, the Riches of Faith | Topical Study | 8.5x11 | 165 | 0.4125in | Stone `#33383a` |
 | Life (Part Four) | Topical Study | 8.5x11 | 165 | 0.4125in | Deep-pine `#1f2f2a` |
 | Out of the Dust (Part One) | Topical Study | 8.5x11 | 219 | 0.5475in | Soil `#241a12` |
 | Philippians: Joy from the Dust in Christ Alone | Book Study | 6x9 | 178 | 0.445in | Char `#1c1611` |
 | Prayer | Topical Study | 8.5x11 | 185 | 0.4625in | Smolder `#3d1c0c` |
 | Promise, Struggle, Exile, Providence: A Study in Genesis 18–50 | Topical Study | 8.5x11 | 187 | 0.4675in | Basalt `#2a2530` |
-| Revive Me: A Journey Out of the Dust | Book (single-volume hardcover) | 6x9 | 232 | 0.711in (KDP hardcover) | Ochre `#3e2c0e` |
+| Revive Me: A Journey Out of the Dust | Book (single-volume hardcover) | 6x9 | 234 | 0.711in (KDP hardcover; computed for 232pp, recheck for 234) | Ochre `#3e2c0e` |
 | The Gospel | Topical Study | 8.5x11 | 157 | 0.3925in | Garnet `#2e1013` |
 | The Holy Spirit | Topical Study | 8.5x11 | 116 | 0.29in | Deep Teal `#12302c` |
 | The Sermon on the Mount: Seeing Your Sin, and the Sufficiency of Christ | Topical Study | 8.5x11 | 163 | 0.4075in | Storm `#34383e` |
 | The Ten Commandments: Fulfilled and Empowered | Topical Study | 8.5x11 | 183 | 0.4575in | Cinder `#2c211e` |
+
+The John covers' Blue-grey is the approximate colour of their rendered back panel, not a named ground from `CoverBlendMottlePairings`.
 
 Ground names follow the 2026-10-01 renames: Soot, Peat, Garnet, Smolder and Tannin were formerly "Ash", "Loam", "Oxblood", "Ember" and "Rust".

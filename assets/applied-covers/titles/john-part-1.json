@@ -1,0 +1,32 @@
+{
+  "key": "john-part-1",
+  "file": "Soul_Dust_Revival_John_Part_1_Cover.pdf",
+  "trim": "6x9",
+  "pages": 211,
+  "ground": "#385569",
+  "front": {
+    "kicker": "PART ONE · A STUDY OF",
+    "title": "John",
+    "tagline": "That You May Believe",
+    "theme": "FROM DUST TO THE WORD MADE FLESH",
+    "kind": "A TWELVE-WEEK BOOK STUDY"
+  },
+  "back": {
+    "kicker": "PART ONE · THE WORD BECAME FLESH",
+    "hook": "The One who made the dust stepped down into it.",
+    "paragraphs": [
+      "Near the end of his Gospel, John tells you why he wrote it: that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in his name.",
+      "Twelve weeks walk John 1–5 — the Word before the dust, the Lamb of God, the new birth, living water, and the Son who gives life to the dead."
+    ],
+    "items": [
+      "A Scripture Study Dive essay",
+      "The full passage in the World English Bible",
+      "Five Greek word studies, each with a Live It response",
+      "Five Life Application practices and a daily prayer",
+      "A Bottom Line and a “Lift Up Your Eyes” benediction"
+    ]
+  },
+  "spine": {
+    "title": "John. Part One"
+  }
+}
