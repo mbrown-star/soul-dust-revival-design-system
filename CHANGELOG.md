@@ -2,6 +2,10 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-10-19: Benedictions, Blessings & Doxologies study cover
+- Benedictions, Blessings & Doxologies cover added: Topical Study, 8.5x11, 176pp, ground Sapphire `#15264A` (new, from the Revelation 5 throne scene), spine 0.44in. Copy file `titles/benedictions-study.json`. It replaces the earlier 14-page Scriptural Catalog cover (Navy `#1E2733`, blank spine) for the same title, whose register row is superseded.
+- Rebuilds from the copy file and passes `verify_covers.py` (16/16). The shipped PDF was built outside this repo's checks, so a rebuild may differ from it; no pixel comparison was made.
+
 ## 2026-10-12: John covers added, Revive Me page count corrected
 - John: That You May Believe, Parts One to Four added: Book Study, 6x9, ground Blue-grey `#385569` (approximate, read off the rendered back panel; not a named ground), 211 / 215 / 212 / 210pp, spines 0.5275 / 0.5375 / 0.53 / 0.525in. Copy files `titles/john-part-1.json` to `john-part-4.json`, transcribed from the delivered covers (no text layer) and confirmed by Matt. They rebuild and pass `verify_covers.py` (69/69), but the shipped PDFs were built outside this pipeline, so a rebuild may differ from them.
 - Revive Me page count corrected from 232 to 234, per its interior PDF. The 0.711in spine and 14.2867in x 10.4167in wrap still match the 232-page calculation, so they need rechecking against KDP's hardcover calculator for 234pp before upload.

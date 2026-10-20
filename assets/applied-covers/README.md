@@ -56,7 +56,7 @@ Render → **`verify_covers.py` must exit 0** (it checks keyline insets, title/t
 | 1 Peter | Book Study | 6x9 | 189 | 0.4725in | Soot `#2a2a26` |
 | 1 Timothy: Grace Abounding in the Dust | Book Study | 6x9 | 203 | 0.5075in | Gunmetal `#323232` |
 | A 365-Day Journey Through the Bible | 365-Day Devotional | 6x9 | 371 | 0.9275in | Slate `#26302f` |
-| Benedictions, Blessings & Doxologies: A Scriptural Catalog | Topical Study | 8.5x11 | 14 | blank spine | Navy `#1e2733` |
+| Benedictions, Blessings & Doxologies: From Dust to Doxology (replaces the 14-page Scriptural Catalog cover: Topical Study, 8.5x11, 14pp, blank spine, Navy `#1e2733`) | Topical Study | 8.5x11 | 176 | 0.44in | Sapphire `#15264A` |
 | Colossians: The All-Sufficient Christ | Book Study | 6x9 | 201 | 0.5025in | Regal `#211b47` |
 | Confession & Repentance (Part Three) | Topical Study | 8.5x11 | 127 | 0.3175in | Marrow `#211b16` |
 | Dust, Breath, Fall, Promise: A Study in Genesis 1–17 | Topical Study | 8.5x11 | 168 | 0.42in | Peat `#2e2a18` |

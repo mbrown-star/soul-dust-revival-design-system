@@ -1,5 +1,10 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: Benedictions study cover
+date: 2026-10-20
+- Added `assets/applied-covers/titles/benedictions-study.json` (converted from the Drive copy file's schema to the repo's), a register row (Sapphire `#15264A`, 176pp, 0.44in; supersedes the 14-page Catalog row) and a changelog entry. Rebuilds and passes `verify_covers.py` (16/16). The Drive PDF was too large to compare, so no pixel comparison was made.
+- No token, font or component changes; the web app needed no update.
+
 ## Sync from Claude design system: John covers, Revive Me page count
 date: 2026-10-12
 - Added `titles/john-part-1.json` to `john-part-4.json`, register rows (Blue-grey `#385569`, approximate) and a changelog entry. All four rebuild and pass `verify_covers.py` (69/69).
