@@ -1,5 +1,14 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: web-app currency audit, parchment lightened, gold-700
+date: 2026-11-06
+- `CHANGELOG.md` copied verbatim (2026-11-05 entries: gold-700 token, parchment lightened, web-app currency audit).
+- `tokens/colors.css` and `_ds_manifest.json` tokens: `parchment` `#f7ecd8` → `#fefdfa`, `surface-sunken` `#e8dcc9` → `#eeebe8`, new `gold-700` `#8d6407`, contrast figures recomputed.
+- `readme.md`: content fundamentals, visual foundations, iconography, brand marks, open items and the new "Web app — current state" section ported from the Claude README; the repo's own master-copy bullet, Components, Pages, Covers and Index sections kept.
+- Not ported: new `PurchaseOptions`, `AdminFormActions` and `PaletteOptions` components (preview-only in the Claude system, absent from its bundle, so no `_ds_bundle.js` change and no `.prompt.md` target) and the stale-notes in the Storefront/StudyApp/AdminConsole READMEs (no `.prompt.md` counterpart; the `ui_kits` READMEs describe the repo's own kits). Top-level HTML pages (palette, homepage, `guidelines/colors-neutral.card.html`) still show the old parchment value.
+- Web app: `app/globals.css`, `tailwind.config.js` and README updated to match (study-platform-scaffold PR).
+- Covers: no new titles in Drive.
+
 ## Sync from Claude design system: Benedictions study cover
 date: 2026-10-20
 - Added `assets/applied-covers/titles/benedictions-study.json` (converted from the Drive copy file's schema to the repo's), a register row (Sapphire `#15264A`, 176pp, 0.44in; supersedes the 14-page Catalog row) and a changelog entry. Rebuilds and passes `verify_covers.py` (16/16). The Drive PDF was too large to compare, so no pixel comparison was made.
