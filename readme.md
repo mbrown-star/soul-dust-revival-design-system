@@ -23,10 +23,10 @@ The design system for **Soul Dust Revival**, a Psalm 119:25 devotional ministry 
 ## Visual foundations
 
 - **Color: the sunset palette.** Ink `#1a120c` on parchment `#fefdfa` (lightened 2026-11-05 from the original cream `#f7ecd8` — see `PaletteOptions`). Dusk `#3a281c` for deep sections and footers, moss `#6b5344` for secondary text. **Ember `#e2762c`** is the one chromatic accent and **gold `#f6c453`** the highlight.
-- **Contrast rule:** ember (3.01:1 on the current parchment) and gold (1.60:1) never carry small text on parchment. Use them for buttons, fills and large display type. For small accent text (links, inline emphasis) use **`ember-700` `#b8501f`** (4.91:1) or **`gold-700` `#8d6407`** (5.22:1); use ink or moss for ordinary body copy. `error` `#a8301c`, `state-success` `#3b5a2b` and `state-warning` (= `gold-700`) are the three status colors, each AA-passing at any size on parchment.
+- **Contrast rule:** ember (3.01:1 on the current parchment) and gold (1.60:1) never carry small text on parchment. Use them for buttons, fills and large display type. For small accent text (links, inline emphasis) use **`ember-700` `#b8501f`** (4.91:1) or **`gold-700` `#8d6407`** (5.22:1); use ink or moss for ordinary body copy. `error` `#a8301c`, `success` `#3b5a2b` (added to `tailwind.config.js` 2026-11-06 — `tokens.json` had documented it as `state-success` since 2026-10-01, but it had never actually been exposed as a usable class until a real success-state UI need, the social-post "published" status, surfaced the gap) and `state-warning` (= `gold-700`) are the three status colors, each AA-passing at any size on parchment.
 - **Type:** **Anton** for display (headlines, hero, wordmark) at its native weight 400, often gradient-clipped ember→gold. Page and section titles are uppercase with leading ~0.92. Headings *inside* long-form articles (lessons, blog, leader resources) stay in normal case so long headings read easily. **Source Serif 4** for reading (lessons, blog). **Archivo** for UI (buttons, labels, nav, forms), with semibold headings. All three load from Google Fonts.
 - **Article text** (lessons, blog, leader resources): body, headings, links and quotes in ink; lead text, list markers and captions in moss; links underlined in ember; quote borders ember. These pages use the site's standard `max-w-5xl mx-auto px-4` content width (see "Web app — current state"), with the prose column itself capped narrower for readability.
-- **Spacing:** 4px-based scale. Columns are narrow and centered: 24rem login, 32rem admin forms, 36rem checkout, 42rem lesson reading. The admin shell's own content column was widened from 56rem (`max-w-4xl`) to the site's full standard 80rem (`max-w-5xl`) on 2026-11-05 — it's no longer a narrower exception; see below.
+- **Spacing:** 4px-based scale. Narrow, centered columns: 24rem login, 36rem checkout, 42rem lesson reading. Admin forms are **not** one of these narrow columns — every admin form spans the full `max-w-5xl` page width as of 2026-11-07, matching the nav bar exactly (edge to edge, logo to Log out), per explicit direction after an initial attempt to standardize them at a narrower 32rem was corrected. The admin shell's own content column was widened from 56rem (`max-w-4xl`) to the site's full standard 80rem (`max-w-5xl`) on 2026-11-05 — it's no longer a narrower exception either.
 - **Borders over shadows:** 1px `border-default` and 8px corners on cards, fields, dividers and buttons. The only shadow is `shadow-popover`, on the admin's one popover menu.
 - **Focus:** every interactive element gets a 2px outline with a 2px offset (WCAG 2.4.7). Use `focus-ring` (ink) on light grounds (15.8:1+ on parchment) and `focus-ring-on-dark` (gold) on ink and dusk sections. Never use gold on parchment, where it's only 1.60:1. Never remove the ring.
 - **Motion:** functional only (progress-bar fill, hover/focus transitions) and always honors `prefers-reduced-motion`. The hero's rising dust motes are the one decorative motion. A `.mottle` cloud-blotch/grain/vignette texture (ported from the cover system's own mottle treatment, see `CoverMottleLibrary`) is applied to the homepage's dusk band and the site footer as of 2026-11-05 — the one place cover texture and web-app surface share a treatment; not applied elsewhere.
@@ -48,17 +48,29 @@ The web app is the actively-developed product and changes far more often than th
 
 **Commerce / products.** A product's `format` is `physical`, `digital`, or (added 2026-11-05) **`both`** — sold as two fully independent purchases, each with its own price and own Stripe Price, not a combined bundle. See the new `PurchaseOptions` component for the detail-page treatment and the admin's two-fieldset form (also new); a cart line and a checkout/order line both carry which variant (`physical`/`digital`) they are. A product's alt text is encouraged in the admin UI but, as of 2026-11-05, no longer enforced at all (widened from an earlier book-cover-only exemption) — a real, accepted accessibility trade-off, not an oversight.
 
-**Admin delete.** Products, blog posts and studies (added 2026-11-05) can each be deleted from their edit form — see the new `AdminFormActions` component, including the one open compliance gap it documents (the live buttons currently use Tailwind's stock `neutral-900`/`red-600`, not this system's `ink`/`error` tokens).
+**Admin delete.** Products, blog posts and studies (added 2026-11-05) can each be deleted from their edit form — see the `AdminFormActions` component. The live buttons' token-compliance gap this component flagged (`neutral-900`/`red-600` instead of `ink`/`error`) was fixed in the site's own code on 2026-11-06. A second gap this component also flagged — the three forms hand-rolling their own button markup instead of sharing one component, so Delete's actual *shape* (plain text vs. a bordered button) never matched this preview even after the color fix — was closed on 2026-11-07 with a new shared `components/ui/Button.tsx`, a direct port of this system's own `Button.jsx`. All three forms now use it for Save/Delete; `AdminFormActions`' preview is the live implementation, not an approximation.
 
 **Rich text.** Blog post bodies moved from markdown to the same Tiptap-HTML editor already used for leader resources and lesson content blocks (`RichTextEditor`) — one authoring experience across all long-form admin content now, not two.
 
-**Not yet audited into this system** (known gaps, not silently assumed fine): the checkout/cart page's line-item treatment for a "both"-format purchase; the account, login/signup, and order-confirmation pages as they exist today; the blog listing/post and leader-resources pages at their current `max-w-5xl` width; the admin Users/Reports/Social-scheduling screens; and the full current `AdminConsole` composition (products list/form, studies list/lesson editor) — all real, shipped parts of the site that this system either never had a live component for, or had one that's now stale per the compile-date note above.
+**Storefront rebuilt from live source (2026-11-06).** The checkout/cart page's line-item treatment for a "both"-format purchase is now covered — see `Storefront` below, rebuilt directly from `app/(marketing)/books/page.tsx`, `books/[slug]/page.tsx`, `checkout/page.tsx`, `checkout/success/page.tsx` and `lib/cart/CartContext.tsx`. The same pass found and fixed a second live token-compliance gap: `checkout/success/page.tsx` used `neutral-600`/`neutral-900` instead of `moss`/`ink`.
+
+**Site-wide token-compliance fix (2026-11-06).** What started as the `AdminFormActions` finding (three admin forms using stock `neutral-900`/`red-600`) turned out to be nearly every admin page and several public-facing files — confirmed with the user and fixed across 38 files total. Added a `success` token to `tailwind.config.js` (`#3b5a2b`), finally exposing `tokens.json`'s already-documented `state-success` value as a usable Tailwind class — a real success state (the social-post "published" status) had no mapped token before this and fell back to stock green. See `CHANGELOG.md` for the full file list and mapping.
+
+**`AdminConsole` rebuilt from live source (2026-11-06).** All 8 real admin sections (Products, Studies, Leader Resources, Blog, Social, Users, Reports, Settings) now exist in this composition, closing the structural gap flagged below — the original compile only ever modeled Products → Studies → lesson editor. See `AdminConsole`'s own README for exactly what's modeled with real depth versus as a representative screen.
+
+**`StudyApp` rebuilt from live source (2026-11-06) — the last of the three.** Now models the real entitlement gate (an unentitled study redirects to its own linked product's purchase page, not a generic "forbidden" screen), real progress tracking (per-study and per-lesson, from `lessonProgress`), and the text/callout/question content-block types. See `StudyApp`'s own README for what's modeled with real depth versus not covered at all (video/audio blocks, the real magic-link email flow).
+
+**All three page compositions (`Storefront`, `AdminConsole`, `StudyApp`) are now current as of 2026-11-06** — the resync flagged as an open item on 2026-11-05 is complete.
+
+**Account, Blog, and the remaining admin/lesson gaps closed (2026-11-07).** New `Account` component (login/signup/account-page composition, including the delete-account "type DELETE to confirm" safeguard) and `Blog` component (the public listing/post pages). `AdminConsole` gained its Reports → Engagement/Social-analytics sub-pages and the Social → New post composer. `StudyApp`'s lesson viewer gained video and audio content blocks (placeholder playback, real transcript-disclosure behavior). The same pass found and fixed one more live token-compliance gap: the login/signup heading (`AuthForm.tsx`) used plain `text-xl font-semibold` instead of `font-display`/`ink` — missed earlier because that file lives under `components/`, outside the `app/` sweep the earlier fix searched.
+
+**Not yet audited into this system:** leader-resources pages at their current `max-w-5xl` width (the add-user form and social composer's recurring-schedule config are intentionally out of scope at the representative-depth tier `AdminConsole` uses for secondary sections).
 
 ## Components
 
 Under `components/`, each as `<Name>.jsx` + `<Name>.d.ts` + `<Name>.prompt.md`, plus a preview card per folder. `_ds_bundle.js` is the pre-built bundle (namespace `StudyPlatformDesignSystem_d2afba`).
 
-- **Forms:** Button, Checkbox, ColorPicker, Input, Textarea, Select (plus the `AdminFormActions` composition, documented in the Claude system only)
+- **Forms:** Button, Checkbox, ColorPicker, Input, Textarea, Select (plus the `AdminFormActions` composition, documented in the Claude system only; the live web app's `components/ui/Button.tsx` ports `Button` since 2026-11-07)
 - **Feedback:** Callout, ProgressBar, StatusMessage
 - **Navigation:** Tabs
 - **Data display:** Badge, ProductRow
@@ -76,6 +88,7 @@ The top-level HTML files are the brand's source documents. In the Claude system 
 - **Covers:** `Blended Cover Grounds.html`, `Book Cover Library - Mottled Colors.html`, `Book Cover Library - Image Treatments.html`, `Hero Image Variations.html`
 - **Pages:** `Soul Dust Revival Homepage.html` (current), plus `ui_kits/storefront`, `ui_kits/study-app` and `ui_kits/admin` (also as `templates/`)
 - **Archive:** `Soul Dust Revival Homepage v2.html`, `v3.html` and `Homepage Variations.html` (earlier drafts)
+- **Also in the Claude system only** (live-source compositions, not ported to `ui_kits/`): `Account` and `Blog` (new 2026-11-07); `Storefront`, `AdminConsole` and `StudyApp` there were rebuilt from the live site's source 2026-11-06/07, while this repo's `ui_kits/` still hold the original scaffold versions.
 
 ## Covers
 
@@ -86,8 +99,7 @@ The top-level HTML files are the brand's source documents. In the Claude system 
 ## Open items
 
 - **`surface-sunken` and `border-default`** are literal approximations of what were `color-mix()` blends in the original CSS.
-- **`AdminConsole`/`Storefront`/`StudyApp` need a real resync from the live `soul-dust-revival` codebase**, not the original scaffold — a proper `/design-sync`-style pass (see this artifact type's `from-code.md`) rather than the hand-audited honesty pass this entry represents. Until then, treat "Web app — current state" above as the source of truth for anything these three compositions don't agree with.
-- **The admin forms' `neutral-900`/`red-600` vs. `ink`/`error` gap** (see `AdminFormActions`) is a live-code fix, not a design-system one — flagged here so it doesn't get silently "documented around."
+
 
 ## Index
 
