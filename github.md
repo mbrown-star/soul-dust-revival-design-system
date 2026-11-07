@@ -1,5 +1,14 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: Save/Delete Button port, Account/Blog, admin forms full-width
+date: 2026-11-07
+- `CHANGELOG.md` copied verbatim (2026-11-06 and 2026-11-07 entries: admin token fix, Storefront/AdminConsole/StudyApp rebuilt from live source, Account and Blog added, admin forms widened, shared Button on the live site).
+- `readme.md`: ported the Visual foundations updates (`success` Tailwind token, admin forms full-width), the expanded "Web app — current state" section and the trimmed Open items; the repo's own master-copy and web-app bullets, Components, Pages, Covers and Index sections kept, with a note on the Claude-only compositions.
+- No token, font or cover changes: `tokens.json` only had a usage-note edit (`content-md`, `state-success`), no value changed, so `tokens/*.css` and `_ds_manifest.json` stay as they are. `assets/applied-covers/*` is identical to the Claude system.
+- Not ported: new `Account`/`Blog` components and the rebuilt `Storefront`/`AdminConsole`/`StudyApp` compositions (rebuilt in the Claude system from the live site's source, no `.prompt.md` target; the repo's `ui_kits` and `_ds_bundle.js` blocks stay the original scaffold versions, as on 2026-11-06).
+- Covers: no new titles in Drive (all folders are in the register).
+- Web app: no color or font change, so study-platform-scaffold needed no update.
+
 ## Sync from Claude design system: web-app currency audit, parchment lightened, gold-700
 date: 2026-11-06
 - `CHANGELOG.md` copied verbatim (2026-11-05 entries: gold-700 token, parchment lightened, web-app currency audit).
