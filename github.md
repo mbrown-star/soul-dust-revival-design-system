@@ -1,5 +1,11 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: sign-in code wording, NKJV quote, Sign in / Sign out
+date: 2026-11-13
+- `CHANGELOG.md` copied verbatim (new 2026-11-13 entry: content wording matches the site).
+- `readme.md`: the same five wording changes as the Claude system's README: Content fundamentals examples "Send code" and "We sent a code to you@example.com."; the opening quote in NKJV; "Sign in"/"Sign out" and Leader Resources in the Navigation paragraph; "logo to Sign out" under Spacing. The repo's own sections kept otherwise.
+- No token, font or cover changes.
+
 ## Sync from Claude design system: site work from 2026-11-07 to 2026-11-12
 date: 2026-11-13
 - `CHANGELOG.md` copied verbatim (2026-11-13 entry: Storefront, Account, StudyApp and AdminConsole brought current; new StudyReader, DevotionalReader, Journey and SiteNav; PurchaseOptions copy corrected).

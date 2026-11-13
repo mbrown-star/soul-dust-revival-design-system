@@ -2,6 +2,11 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-11-13: Content wording matches the site's sign-in code and NKJV quote
+- **Why:** the site's staging audit found the README still quoting the old magic-link copy as model wording.
+- **Content fundamentals:** the examples now read "Send code" and "We sent a code to you@example.com.", as the sign-in form does.
+- **Also brought in line:** the opening quote is the NKJV the site now uses ("My soul clings to the dust"); the navigation paragraph says "Sign in" and "Sign out" (renamed on the site the same day) and lists Leader Resources in the Profile menu for leaders and admins.
+
 ## 2026-11-13: Brought current with the site's work from 2026-11-07 to 2026-11-12
 - **Why:** asked to update the design system with everything since 11-07. The site shipped many builds in those days (the store, sign-in, the readers, the Journey, admin tools) and none had reached this system. Each composition below was rebuilt from the live source files, read fresh, not from the site's build notes.
 - **Tokens unchanged.** `tailwind.config.js`, `app/globals.css` and `app/layout.tsx` have no changes since 2026-11-07, so no color, type or spacing token moved.
