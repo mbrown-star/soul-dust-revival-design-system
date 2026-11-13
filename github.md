@@ -1,5 +1,13 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: site work from 2026-11-07 to 2026-11-12
+date: 2026-11-13
+- `CHANGELOG.md` copied verbatim (2026-11-13 entry: Storefront, Account, StudyApp and AdminConsole brought current; new StudyReader, DevotionalReader, Journey and SiteNav; PurchaseOptions copy corrected).
+- `readme.md`: ported the updated "Web app — current state" section (status date, Navigation paragraph, the 2026-11-07 to 2026-11-13 summary and "Still not in this system"); noted `SiteNav` under Components and the new compositions under Pages. The repo's own master-copy and web-app bullets, Components, Pages, Covers and Index sections kept otherwise.
+- No token, font or cover changes: the site's `tailwind.config.js`, `app/globals.css` and `app/layout.tsx` are unchanged since 2026-11-07, so `tokens/*.css`, `_ds_manifest.json` and `_ds_bundle.js` stay as they are.
+- Not ported: the compositions themselves (preview-only in the Claude system, no `.prompt.md` target), as in the 2026-11-06 and 2026-11-07 syncs. `ui_kits/` still holds the original scaffold versions.
+- Web app: no color or font change, so study-platform-scaffold needed no update.
+
 ## Sync from Claude design system: Save/Delete Button port, Account/Blog, admin forms full-width
 date: 2026-11-07
 - `CHANGELOG.md` copied verbatim (2026-11-06 and 2026-11-07 entries: admin token fix, Storefront/AdminConsole/StudyApp rebuilt from live source, Account and Blog added, admin forms widened, shared Button on the live site).

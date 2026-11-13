@@ -42,9 +42,9 @@ No icon set. The few icons are Unicode glyphs in text: `⠿` drag handle, `↑`/
 
 ## Web app — current state
 
-The web app is the actively-developed product and changes far more often than this system has been kept current with. This section is the honest status as of **2026-11-05**, written from the live site's own source and its `CLAUDE.md` build log, not from the (now stale) `AdminConsole`/`Storefront`/`StudyApp` page compositions below, which were compiled once from the original scaffold's pre-customization `ui_kits/*.jsx` on 2026-09-21 and have not been resynced since. Read this section for what's actually true today; treat those three compositions as historical reference only until they're rebuilt from the live site (see each one's own README for what specifically has since changed under it).
+The web app is the actively-developed product and changes far more often than this system has been kept current with. This section is the honest status as of **2026-11-13** (its first version was written 2026-11-05), written from the live site's own source and its `CLAUDE.md` build log. The page compositions were rebuilt from live source on 2026-11-06/07 and brought current again on 2026-11-13 (see the last paragraph of this section).
 
-**Navigation.** Every top-level nav bar — public and admin — renders through one shared shell (`SiteHeaderShell`: sticky, `bg-ink/95` with backdrop blur, the monogram+wordmark lockup on the left, routing home) so the two can't drift apart in size or color. The public nav (`SiteNav`) groups public links first (Books & Studies, Blog, Cart, "Log in" when signed out), then a divider, then logged-in-only items (Your Studies, a "Profile" dropdown with Account/Admin-when-admin/Log out). The admin nav (`AdminNav`) sits in the same shell and no longer has its own narrower content column — see Spacing above. Nav links and the logo use a text-color-only focus indicator (color shift, no box) rather than a ring, by explicit decision, scoped to just these two nav bars.
+**Navigation.** Every top-level nav bar — public and admin — renders through one shared shell (`SiteHeaderShell`: sticky, `bg-ink/95` with backdrop blur, the monogram+wordmark lockup on the left, routing home) so the two can't drift apart in size or color. The public nav (`SiteNav`, now its own component here) groups public links first (Store, Blog, Cart, "Log in" when signed out), then a divider, then logged-in-only items (App, Contact, a "Profile" dropdown with Account/Admin-when-admin/Log out). Under 640px it collapses into one hamburger menu. The site is split across two hosts: the storefront on `souldustrevival.com` and the reading app (My Library, readers, Account) on `app.souldustrevival.com`, sharing one sign-in. The admin nav (`AdminNav`: Products, Studies, Bundles, Leader Resources, Blog, Social, Users, Reports, Settings, with a gold underline on the current section) sits in the same shell and no longer has its own narrower content column — see Spacing above. Nav links and the logo use a text-color-only focus indicator (color shift, no box) rather than a ring, by explicit decision, scoped to just these two nav bars.
 
 **Commerce / products.** A product's `format` is `physical`, `digital`, or (added 2026-11-05) **`both`** — sold as two fully independent purchases, each with its own price and own Stripe Price, not a combined bundle. See the new `PurchaseOptions` component for the detail-page treatment and the admin's two-fieldset form (also new); a cart line and a checkout/order line both carry which variant (`physical`/`digital`) they are. A product's alt text is encouraged in the admin UI but, as of 2026-11-05, no longer enforced at all (widened from an earlier book-cover-only exemption) — a real, accepted accessibility trade-off, not an oversight.
 
@@ -64,7 +64,14 @@ The web app is the actively-developed product and changes far more often than th
 
 **Account, Blog, and the remaining admin/lesson gaps closed (2026-11-07).** New `Account` component (login/signup/account-page composition, including the delete-account "type DELETE to confirm" safeguard) and `Blog` component (the public listing/post pages). `AdminConsole` gained its Reports → Engagement/Social-analytics sub-pages and the Social → New post composer. `StudyApp`'s lesson viewer gained video and audio content blocks (placeholder playback, real transcript-disclosure behavior). The same pass found and fixed one more live token-compliance gap: the login/signup heading (`AuthForm.tsx`) used plain `text-xl font-semibold` instead of `font-display`/`ink` — missed earlier because that file lives under `components/`, outside the `app/` sweep the earlier fix searched.
 
-**Not yet audited into this system:** leader-resources pages at their current `max-w-5xl` width (the add-user form and social composer's recurring-schedule config are intentionally out of scope at the representative-depth tier `AdminConsole` uses for secondary sections).
+**Everything from 2026-11-07 to 2026-11-13 brought in (2026-11-13).** No token, font or global-style change happened in that time, so `tokens.json` is unchanged; the work was all pages and patterns:
+- **Store** (`/store`, renamed from `/books`): a featured Journey band at the top (`ink` with `.mottle`), search plus Type and Sort pills, cover tiles of one slot shape with each cover at its own shape, the simplified eyebrow ("Study & Digital", "Bundle - Studies & Digital"), Coming soon, Amazon-link-pending, the Buy on Amazon dialog and the "Buying on Amazon? You get both:" box, bundles' "What's included", account-only checkout, and `/claim`. See `Storefront`.
+- **Sign-in is a code, not a link**, and the account page lists orders. Contact is new. See `Account`.
+- **My Library** replaces "Your Studies" (search, Type and Status filters, Continue / Not started / Completed, Start over, free-sample cards and locks, one Journey card). See `StudyApp`.
+- **Three new reader compositions:** `StudyReader` (the five-tab study week with its progress ring, stepper and sheets), `DevotionalReader` (Today, The Year, Journal, Six Faces), and `Journey` (the year-long road, its trail map and thresholds).
+- **Admin**: Bundles, product Kind/Binding/Coming soon/Amazon choice, the drag-and-drop lesson builder with draft and publish, lesson-list badges, user delete and email blocking, Amazon claims. See `AdminConsole`.
+
+**Still not in this system:** leader-resources pages, the study edit page's cover-PDF upload, re-import and Resources panel, the Study week builder's own form, and sneak-peek mode's page (`/sneak-peek`).
 
 ## Components
 
@@ -72,7 +79,7 @@ Under `components/`, each as `<Name>.jsx` + `<Name>.d.ts` + `<Name>.prompt.md`, 
 
 - **Forms:** Button, Checkbox, ColorPicker, Input, Textarea, Select (plus the `AdminFormActions` composition, documented in the Claude system only; the live web app's `components/ui/Button.tsx` ports `Button` since 2026-11-07)
 - **Feedback:** Callout, ProgressBar, StatusMessage
-- **Navigation:** Tabs
+- **Navigation:** Tabs (plus the `SiteNav` composition, Claude system only, new 2026-11-13)
 - **Data display:** Badge, ProductRow
 - **Commerce:** `PurchaseOptions` (format `"both"` dual-purchase panel; documented in the Claude system only, no repo component)
 - **Foundations:** `PaletteOptions` (record of the 2026-11-05 color review; Claude system only)
@@ -88,7 +95,7 @@ The top-level HTML files are the brand's source documents. In the Claude system 
 - **Covers:** `Blended Cover Grounds.html`, `Book Cover Library - Mottled Colors.html`, `Book Cover Library - Image Treatments.html`, `Hero Image Variations.html`
 - **Pages:** `Soul Dust Revival Homepage.html` (current), plus `ui_kits/storefront`, `ui_kits/study-app` and `ui_kits/admin` (also as `templates/`)
 - **Archive:** `Soul Dust Revival Homepage v2.html`, `v3.html` and `Homepage Variations.html` (earlier drafts)
-- **Also in the Claude system only** (live-source compositions, not ported to `ui_kits/`): `Account` and `Blog` (new 2026-11-07); `Storefront`, `AdminConsole` and `StudyApp` there were rebuilt from the live site's source 2026-11-06/07, while this repo's `ui_kits/` still hold the original scaffold versions.
+- **Also in the Claude system only** (live-source compositions, not ported to `ui_kits/`): `Account` and `Blog` (new 2026-11-07); `StudyReader`, `DevotionalReader` and `Journey` (new 2026-11-13); `Storefront`, `AdminConsole`, `StudyApp` and `Account` there were rebuilt from the live site's source 2026-11-06/07 and brought current on 2026-11-13, while this repo's `ui_kits/` still hold the original scaffold versions.
 
 ## Covers
 
