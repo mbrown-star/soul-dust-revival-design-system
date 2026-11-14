@@ -1,5 +1,13 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: sign-in code, NKJV quote, Sign in / Sign out wording
+date: 2026-11-14
+- `CHANGELOG.md` copied verbatim (new 2026-11-13 entry: content wording matches the site's sign-in code and NKJV quote).
+- `readme.md`: ported the wording changes only: the opening Psalm 119:25 quote is now the NKJV ("My soul clings to the dust; Revive me according to Your word"); Content fundamentals examples now read "Send code" and "We sent a code to you@example.com."; Spacing says "logo to Sign out"; the Navigation paragraph says "Sign in" / "Sign out", "signed-in-only", and lists Leader Resources in the Profile menu for leaders and admins. The repo's own master-copy and web-app bullets, Components, Pages, Covers and Index sections kept.
+- No token, font, component or cover changes: `tokens.json` is unchanged, so `tokens/*.css`, `_ds_manifest.json` and `_ds_bundle.js` stay as they are. `assets/applied-covers/README.md` is identical to the Claude system.
+- Covers: no new titles in Drive (every folder is in the register; the Drive copy files for the older titles all date from 2026-10-12 or earlier and were already reviewed in previous syncs).
+- Web app: no color or font change, so study-platform-scaffold needed no update.
+
 ## Sync from Claude design system: site work from 2026-11-07 to 2026-11-12
 date: 2026-11-13
 - `CHANGELOG.md` copied verbatim (2026-11-13 entry: Storefront, Account, StudyApp and AdminConsole brought current; new StudyReader, DevotionalReader, Journey and SiteNav; PurchaseOptions copy corrected).
