@@ -2,6 +2,21 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-11-17 (later): Grounds 39–43 added to the color list
+- **Why:** five grounds on shipped covers were missing from `CoverBlendMottlePairings`, the page new grounds are chosen from, so a future cover could reuse one by accident.
+- **Added:** 39 Gunmetal `#323232`, 40 Coal `#1b1b1b`, 41 Sapphire `#15264a`, 42 Ochre `#3e2c0e`, 43 Verdigris `#1b3b40`: a mottle and a blend for each (480px, in `assets/cover-mottles` and `assets/cover-blends`), the pairings table and page, and both asset READMEs.
+- **Recipe text corrected:** regenerating Soot and Cinder showed the existing blend files were built as mottle + tinted photo, without the textures reapplied over the photo (≈4/255 off that way, ≈18/255 the way the page described). The README now says so; 39–43 follow it.
+- **`applied-covers/README.md`:** register note and background wording updated to match.
+
+## 2026-11-17: Cover pipeline brought back in line with the shipped covers
+- **Why:** the October 2 cover fixes (footer removed, 0.12 bottom pad, tighter 6x9 back spacing) were applied in one build session's own copy of the scripts and never reached this system, GitHub or any SDR-cover-pipeline.zip. A new cover built from here would have brought the footer back near the ISBN barcode.
+- **`applied-covers/gen_covers.py`:** footer removed; 6x9 titles take their back-panel spacing from `calibration.json` (`back_panel_6x9`) instead of hardcoded values.
+- **`applied-covers/calibration.json`:** `content_pad_bottom` 0.085 → 0.12; footer sizes removed; new `back_panel_6x9` block; a `background_note_2026_11_17` recording that the cover background matches the shipped covers in Claude Code Covers and differs from the CoverBlendMottlePairings swatch recipe (no vignette; textures not reapplied over the photo), so it must not be changed without rebuilding the shipped covers.
+- **`applied-covers/verify_covers.py`:** new check that fails any back-panel text within 1.6in of the bottom trim (and reports blank space below the text); the keyline check now looks for a whole gold line, not the first gold pixel.
+- **`applied-covers/titles/1-peter.json`:** the condensed back copy as shipped.
+- **`applied-covers/README.md`:** merged with the project's copy: keeps the October rules and corrected page counts (Ephesians 191, Holy Spirit 151, Prayer 195, Gospel 156), adds the Psalms devotional (Verdigris `#1b3b40`), the background note and the changelog.
+- **Checked:** 1 Peter, Galatians, The Ten Commandments and Prayer rebuilt from their shipped copy files match their shipped PDFs within about 4–5/255, back-panel text at the identical position; verify_covers.py passes; the old scripts fail the new clearance check.
+
 ## 2026-11-13: Content wording matches the site's sign-in code and NKJV quote
 - **Why:** the site's staging audit found the README still quoting the old magic-link copy as model wording.
 - **Content fundamentals:** the examples now read "Send code" and "We sent a code to you@example.com.", as the sign-in form does.

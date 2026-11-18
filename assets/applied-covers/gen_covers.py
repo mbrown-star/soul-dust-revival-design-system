@@ -94,7 +94,17 @@ def build(spec):
     d = dims(spec["trim"], spec["pages"])
     W, H, P, S = d["full_px"], d["fullh_px"], d["panel_px"], d["spine_px"]
     kl, bp, fp, sp = CAL["keyline"], CAL["back_panel"], CAL["front_panel"], CAL["spine"]
-    fx = CAL["fixed_px_at_300dpi"]
+    fx = dict(CAL["fixed_px_at_300dpi"])
+    if spec["trim"] == "6x9":
+        # 6x9 back panels use tighter body spacing (calibration.json "back_panel_6x9").
+        b6 = CAL["back_panel_6x9"]
+        fx["back_hook_line_height"] = b6["hook_line_height"]
+        fx["back_body_line_height"] = b6["body_line_height"]
+        fx["back_item_line_height"] = b6["item_line_height"]
+        for k in b6["gap_lg_replaces"]:
+            fx[k] = round(b6["gap_lg_frac_of_dpi"] * DPI)
+        for k in b6["gap_sm_replaces"]:
+            fx[k] = round(b6["gap_sm_frac_of_dpi"] * DPI)
     ground = spec["ground"]
     front, back, spine = spec["front"], spec["back"], spec.get("spine", {})
 
@@ -148,9 +158,9 @@ def build(spec):
           f'<div class="b-hook">“{esc(back["hook"])}”</div>{paras}'
           f'<div class="b-inc">{esc(back.get("includes_head", "EACH WEEK INCLUDES"))}</div><ul class="b-items">{items}</ul>'
           f'<div class="b-anchor">{esc(back.get("anchor", "“My soul clings to the dust; Revive me according to Your word.”"))}'
-          f'<span class="b-ref">{esc(back.get("anchor_ref", "PSALM 119:25 (NKJV)"))}</span></div></div>'
-          f'<div class="b-foot"><span class="b-fname">{esc(back.get("footer_name", "The Soul Dust Team"))}</span>'
-          f'<span class="b-fsub">{esc(back.get("footer_sub", "MARKETLIFE MINISTRIES · MARKETLIFEMINISTRIES.ORG"))}</span></div>')
+          f'<span class="b-ref">{esc(back.get("anchor_ref", "PSALM 119:25 (NKJV)"))}</span></div></div>')
+    # No footer (2026-10-02 directive): the lower strip of the back panel stays empty for the
+    # KDP/Amazon ISBN barcode stamp. verify_covers.py checks nothing falls below pad_bottom.
 
     # ---- spine ----
     sp_html = ""
@@ -220,9 +230,6 @@ html,body{{width:{W}px;height:{H}px;overflow:hidden;background:{ground}}}
 .b-bul{{position:absolute;left:0;top:.15em;font-size:.8em;color:{GOLD2}}}
 .b-anchor{{margin-top:{fx["back_gap_anchor"]}px;text-align:center;font-size:{fx["back_anchor"]}px;font-style:italic;line-height:1.3}}
 .b-ref{{display:block;margin-top:{fx["back_ref_gap"]}px;font-style:normal;font-weight:bold;font-size:{fx["back_ref"]}px;letter-spacing:.05em;color:{GOLD2};line-height:1.2}}
-.b-foot{{position:absolute;left:0;width:100%;bottom:{pad_bottom}px;text-align:center}}
-.b-fname{{display:block;font-size:{fx["back_footer_name"]}px;line-height:1.2}}
-.b-fsub{{display:block;margin-top:{fx["back_footer_gap"]}px;font-size:{fx["back_footer_sub"]}px;letter-spacing:.08em;color:{GOLD2};line-height:1.2}}
 .spine{{position:absolute;top:0;left:{P}px;width:{S}px;height:{H}px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:{SPINE_SERIF}}}
 .sp{{writing-mode:vertical-rl;text-orientation:sideways;white-space:nowrap;line-height:1}}
 .sp-series{{font-size:{sp_series}px;font-weight:{sw["series"]};letter-spacing:.15em;color:{GOLD}}}
@@ -246,7 +253,7 @@ html,body{{width:{W}px;height:{H}px;overflow:hidden;background:{ground}}}
     os.makedirs(BUILD, exist_ok=True)
     out = os.path.join(BUILD, spec["key"] + ".html")
     open(out, "w").write(page)
-    return {"key": spec["key"], "title": spec["front"]["title"], "file": spec.get("file", spec["key"] + ".pdf"),
+    return {"key": spec["key"], "title": spec["front"]["title"], "file": spec.get("file", spec["key"] + ".pdf"), "trim": spec["trim"], "pad_bottom": pad_bottom,
             "html": out, "journey": bool(spine.get("journey")), "spine_text": bool(sp_html), **d}
 
 

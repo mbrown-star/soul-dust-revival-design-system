@@ -127,17 +127,19 @@ for m in manifest:
     #    first row (from top and from bottom) that hits GOLD2, and a row near vertical
     #    center for the first column (from each side) that hits GOLD2.
     def measure_keyline(panel_left):
-        col_x = panel_left + panel_px // 2
-        col = arr[:, col_x, :]
-        gold_rows = np.where(mask_color(col, GOLD2, tol=45))[0]
-        top = gold_rows.min() if gold_rows.size else None
-        bottom = (h - 1 - gold_rows.max()) if gold_rows.size else None
-
-        row_y = h // 2
-        row = arr[row_y, panel_left:panel_left + panel_px, :]
-        gold_cols = np.where(mask_color(row, GOLD2, tol=45))[0]
-        left = gold_cols.min() if gold_cols.size else None
-        right = (panel_px - 1 - gold_cols.max()) if gold_cols.size else None
+        # A keyline is a LINE: look for rows (and columns) where most of the panel's span is
+        # gold, not for the first gold-ish pixel in one column. A single column also catches
+        # light sky in the hero photo, which can sit close to the keyline gold.
+        panel = arr[:, panel_left:panel_left + panel_px, :]
+        g = mask_color(panel, GOLD2, tol=45)
+        span_x = slice(panel_px // 5, panel_px - panel_px // 5)
+        span_y = slice(h // 5, h - h // 5)
+        rows = np.where(g[:, span_x].mean(axis=1) > 0.5)[0]
+        cols = np.where(g[span_y, :].mean(axis=0) > 0.5)[0]
+        top = rows.min() if rows.size else None
+        bottom = (h - 1 - rows.max()) if rows.size else None
+        left = cols.min() if cols.size else None
+        right = (panel_px - 1 - cols.max()) if cols.size else None
         return top, bottom, left, right
 
     for panel_name, panel_left in [("back", back_left), ("front", front_left)]:
@@ -184,6 +186,36 @@ for m in manifest:
               f"title's lowest cream pixel at y={title_bottom_abs}, tagline starts at y={y_tag} (gap={gap}px)")
     else:
         failures.append(f"[{key}] front title text not found in expected band -- possible render failure")
+
+    # 4b. Back-panel clearance (2026-10-02 directive). No footer, and no back-panel text may sit
+    #     below the reserved bottom zone: nothing inside the keyline lower than max(pad_bottom from
+    #     calibration.json, 1.6in above the bottom trim). That keeps the KDP/Amazon ISBN stamp
+    #     (lower-right 2.1in x 1.35in) clear with margin. Also reports blank space below the last
+    #     line of text as a share of panel height, for comparison with other titles of the trim.
+    BLEED_PX = round(0.125 * 300)
+    clear_from_trim = round(1.6 * 300)
+    pad_bottom = m.get("pad_bottom", 0)
+    floor_y = h - max(pad_bottom, BLEED_PX + clear_from_trim)
+    kl_inner = expected_kl_tb + round(_KL["double_line_gap_frac_of_panel_height"] * fullh_px) \
+        + 2 * max(1, round(_KL["line_weight_frac_of_dpi"] * 300)) + 6
+    x0 = back_left + expected_kl_lr + kl_inner
+    x1 = back_left + panel_px - expected_kl_lr - kl_inner
+    inner = arr[kl_inner:h - kl_inner, x0:x1, :]
+    ink = (mask_color(inner, CREAM, tol=60) | mask_color(inner, GOLD, tol=45) | mask_color(inner, GOLD2, tol=45))
+    ink_rows = np.where(ink.sum(axis=1) >= 3)[0]
+    if ink_rows.size:
+        last_text_y = kl_inner + ink_rows.max()
+        check(last_text_y < floor_y,
+              f"[{key}] back panel: no text in the reserved bottom zone (ISBN barcode clearance)",
+              f"lowest text at y={last_text_y}, must be above y={floor_y} "
+              f"({(h - BLEED_PX - last_text_y) / 300:.2f}in from bottom trim; need >1.6in)")
+        inner_bottom = h - kl_inner
+        blank_pct = 100.0 * (inner_bottom - last_text_y) / fullh_px
+        m["_blank_pct"] = blank_pct
+        print(f"   back panel: lowest text {(h - BLEED_PX - last_text_y) / 300:.2f}in above bottom trim; "
+              f"blank below text {blank_pct:.1f}% of panel height")
+    else:
+        failures.append(f"[{key}] back panel text not found -- possible render failure")
 
     # 5. Spine element font sizes -- each of the 5 stacked vertical-writing-mode lines
     #    should measure (as a pixel WIDTH across the spine) close to calibration.json's

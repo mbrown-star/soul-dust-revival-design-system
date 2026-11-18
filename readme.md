@@ -99,7 +99,7 @@ The top-level HTML files are the brand's source documents. In the Claude system 
 
 ## Covers
 
-- **Grounds:** `assets/cover-mottles/` (flat color + mottle texture) and `assets/cover-blends/` (the hero photo, duotoned and blended onto that mottle), 38 of each, numbered in pairs. Every ground has one unique name. `components/covers/CoverBlendMottlePairings.README.md` lists every name and hex value. `01`–`15` and the hero variants are full resolution here; `16`–`38` exist only at 480px.
+- **Grounds:** `assets/cover-mottles/` (flat color + mottle texture) and `assets/cover-blends/` (the hero photo, duotoned and blended onto that mottle), 38 of each, numbered in pairs. Every ground has one unique name. `components/covers/CoverBlendMottlePairings.README.md` lists every name and hex value. `01`–`15` and the hero variants are full resolution here; `16`–`43` exist only at 480px.
 - **Recipe and tooling:** `assets/applied-covers/` holds the rules, `calibration.json`, the build pipeline (`gen_covers.py`, `render.py`, `verify_covers.py`, `to_pdf.py`), one copy file per title in `titles/`, and the Ephesians reference cover.
 - **Register:** every shipped title with its trim, spine and ground, so each new title can get its own ground. See `assets/applied-covers/README.md`.
 
