@@ -15,8 +15,8 @@
     "kicker": "A TWELVE-WEEK BOOK STUDY",
     "hook": "Dust is not the end. It is the staging ground of resurrection grace.",
     "paragraphs": [
-      "Of all the New Testament letters, 1 Peter lives closest to the ground. It was written to exiles and foreigners, a scattered people facing slander and a fiery trial, and it does not soften any of that. But in the same breath it says God has caused you to be born again to a living hope. Twelve weeks walk straight through the letter, chapter by chapter, from that new birth to the humility that waits on God's mighty hand.",
-      "Before Week One, “The Six Faces of the Dust” names what the psalmist meant by a soul clinging to dust -- frailty, humiliation, sin, worldliness, nearness to despair, and the dust God delights to revive -- so that whatever face your own dust wears, you know it is precisely the ground He stoops to reach. Ransomed from the futile ways handed down to you, called a living stone, and told that suffering is a little while but the glory is eternal, you are not too far down for this letter."
+      "1 Peter lives closest to the ground of any New Testament letter -- written to exiles facing a fiery trial, yet declaring that God has caused you to be born again to a living hope. Twelve weeks walk straight through it, to the humility that waits on God's mighty hand.",
+      "“The Six Faces of the Dust” names what the psalmist meant by a soul clinging to dust, so whatever face yours wears, you know it is the ground He stoops to reach. Ransomed and called a living stone, you are not too far down for this letter."
     ],
     "items": [
       "A Scripture Study Dive essay",
@@ -26,5 +26,7 @@
       "A Bottom Line and a “Lift Up Your Eyes” benediction"
     ]
   },
-  "spine": {"title": "1 Peter"}
+  "spine": {
+    "title": "1 Peter"
+  }
 }

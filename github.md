@@ -1,5 +1,17 @@
 repo: mbrown-star/study-platform-scaffold
 branch: main
+## Sync from Claude design system: cover pipeline restored, grounds 39–43
+date: 2026-11-18
+- `CHANGELOG.md` copied verbatim (two 2026-11-17 entries: cover pipeline brought back in line with the shipped covers; grounds 39–43 added).
+- `assets/applied-covers/`: `README.md`, `calibration.json`, `gen_covers.py`, `verify_covers.py` and `titles/1-peter.json` copied from the Claude system. Back-panel footer removed, `content_pad_bottom` 0.085 → 0.12, 6x9 back spacing now read from `calibration.json` (`back_panel_6x9`), new ISBN-clearance check and whole-line keyline check in `verify_covers.py`, 1 Peter's condensed copy, merged register and background note. `render.py`, `to_pdf.py`, fonts, the other title files and the reference PDF were already identical.
+- `assets/cover-mottles/` and `assets/cover-blends/`: new 39 Gunmetal, 40 Coal, 41 Sapphire, 42 Ochre, 43 Verdigris (480px, as in the Claude system); both READMEs copied. `01`–`15` originals untouched.
+- `components/covers/CoverBlendMottlePairings.README.md` copied (39–43 in the table, recipe text corrected). `CoverBlendMottlePairings.html` takes the Claude page's new lede and the five new pairs, embedded as 220px JPEGs like the existing ones (the Claude page links its own blobs, which don't resolve here); the card subtitle in the file and in `_ds_manifest.json` now says 36, the number of pairs the page shows.
+- `readme.md`: the repo's own Covers line now says `16`–`43` exist only at 480px. Otherwise unchanged (the Claude README had no edits).
+- No token or font change: `tokens.json` is unchanged, so `tokens/*.css`, `_ds_manifest.json` tokens and `_ds_bundle.js` stay as they are. The Claude `WraparoundCover` bundle block didn't change either.
+- Checked: `gen_covers.py` → `render.py` → `verify_covers.py` on all nine title files. Every per-title check passes (including the new barcode clearance). The cross-title spine check flags James's spine title (28px against 39–40px for the rest), and the previous scripts flag it the same way, so the port didn't cause it.
+- Covers: no new titles in Drive (all 31 folders are in the register; every Drive copy file is dated 2026-10-19 or earlier).
+- Web app: no color or font change, so study-platform-scaffold needed no update.
+
 ## Sync from Claude design system: sign-in code, NKJV quote, Sign in / Sign out wording
 date: 2026-11-14
 - `CHANGELOG.md` copied verbatim (new 2026-11-13 entry: content wording matches the site's sign-in code and NKJV quote).

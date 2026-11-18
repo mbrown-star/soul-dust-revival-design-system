@@ -21,9 +21,10 @@
   },
   "back_panel": {
     "content_pad_top_extra_frac_of_panel_height": 0.085,
-    "content_pad_bottom_extra_frac_of_panel_height": 0.085,
+    "content_pad_bottom_extra_frac_of_panel_height": 0.12,
     "content_pad_x_frac_of_panel_width": 0.1,
-    "measured_as": "gap between the inner keyline and the first line of body text (top), and between the last line of the footer and the inner keyline (bottom); gap between the inner keyline and the left edge of body text (sides). 'extra' means ADDED ON TOP OF the keyline's own inset, not measured from the trim edge."
+    "measured_as": "gap between the inner keyline and the first line of body text (top), and the reserved blank zone between the inner keyline and the lowest line of back-panel text (bottom; verify_covers.py enforces it); gap between the inner keyline and the left edge of body text (sides). 'extra' means ADDED ON TOP OF the keyline's own inset, not measured from the trim edge.",
+    "note_2026_10_02": "Bottom pad raised 0.085 -> 0.12 when the two-line footer was removed from every title, so the lower strip of the back panel stays clear for the KDP/Amazon ISBN barcode stamp. Nothing is positioned from the bottom any more; the value is the floor below which no back text may fall."
   },
   "front_panel": {
     "publisher_line_font_frac_of_panel_height": 0.011,
@@ -102,9 +103,6 @@
     "back_anchor": 45,
     "back_ref_gap": 16,
     "back_ref": 32,
-    "back_footer_name": 51,
-    "back_footer_gap": 12,
-    "back_footer_sub": 34,
     "bg_cloud_opacity": 0.55,
     "bg_grain_opacity": 0.9,
     "bg_photo_opacity": 1.0,
@@ -117,5 +115,24 @@
     "note": "Four-part study only (Out of the Dust / Formed and Sent / Confession & Repentance / Life): 'A Journey' on the front and 'A Journey Part [N]' on the spine. Not part of the Ephesians calibration; only titles whose spec sets journey get them.",
     "journey_front_y_frac": 0.27,
     "journey_gap_diamond_frac": 0.016
-  }
+  },
+  "back_panel_6x9": {
+    "hook_line_height": 1.22,
+    "body_line_height": 1.36,
+    "item_line_height": 1.3,
+    "gap_lg_frac_of_dpi": 0.15,
+    "gap_sm_frac_of_dpi": 0.09,
+    "applies_to": "6x9 trim only (Book Studies, 365-Day Devotionals). 8.5x11 keeps fixed_px_at_300dpi unchanged.",
+    "gap_lg_replaces": [
+      "back_gap_kicker_hook",
+      "back_gap_para",
+      "back_gap_inc",
+      "back_gap_anchor"
+    ],
+    "gap_sm_replaces": [
+      "back_gap_items"
+    ],
+    "note_2026_10_02": "The 6x9 back panel is 2in shorter than 8.5x11, so tighter line-heights and gaps (plus tight copy) keep 6x9 titles in the same blank-space band as 8.5x11. Restored into calibration.json on 2026-11-17: the 2026-10-02 build applied these in its own copy of gen_covers.py, which was never pushed back to the design system."
+  },
+  "background_note_2026_11_17": "The cover background (flat ground, cloud blotch, hero photo faded in across the spine, grain, gold top glow) is the one every shipped cover in Claude Code Covers uses, and those covers are the reference. It is not identical to the swatch recipe in CoverBlendMottlePairings (no vignette; textures are not reapplied over the photo). Do not change it without rebuilding the shipped covers to match."
 }
