@@ -2,6 +2,17 @@
 
 Newest first. Dates before 2026-10-01 are approximate, reconstructed from the old READMEs. Each entry says what changed and why. The current rules are in the README and each group's README. Detailed per-title build notes for finished covers are in the shared drive under *Claude Code Covers → <title> → Build notes*.
 
+## 2026-11-18: Cover pipeline guards and Claude Code hooks
+- **Why:** the October cover mistakes (wrong spines from stale page counts on 2026-10-10; a PDF exported from a stale cached image on 2026-10-02; the footer coming back) were each guarded only by a sentence in the README. The checks now stop the build instead, inside the scripts so they also hold in Cowork, where Claude Code hooks don't run.
+- **`applied-covers/guards.py` (new, standard library only):** the shared checks: a PDF page counter, the verification stamp, the README register reader and the footer finder.
+- **`applied-covers/to_pdf.py`:** exports one title per run and requires `--interior <manuscript.pdf>`. It refuses if the interior's page count isn't the copy file's `pages`, if the PNG is older than its HTML, copy file or `calibration.json`, or if `verify_covers.py` hasn't stamped that exact PNG.
+- **`applied-covers/verify_covers.py`:** on a clean pass, writes `build/.verified-<key>` with the PNG's SHA-256, after first deleting any earlier stamp for those titles.
+- **`applied-covers/render.py`:** stops if the hero photo is missing or doesn't load (it used to render without it, silently). On macOS it also installs the bundled fonts into `~/Library/Fonts`, where Chromium looks.
+- **`applied-covers/gen_covers.py`:** refuses a copy file with any footer field, or with a ground the register already gives another title (same-name titles, like the four John parts, may share one).
+- **Claude Code hooks (`.claude/settings.json`, `.claude/hooks/`):** rebuild and verify the canary covers after edits to the scripts, `calibration.json` or a copy file; check `calibration.json` has every key the scripts read (derived from their source); before Claude stops, require this changelog for script changes and a register row for a new title. Unit tests in `.claude/hooks/test_hooks.py`.
+- **`applied-covers/README.md`:** build steps updated for `--interior`; new "Guards and hooks" section; changelog entry.
+- **Checked:** 1 Peter (6x9) and The Ten Commandments (8.5x11) rebuilt end to end against their interiors (189 and 183 pages) match their shipped PDFs (mean pixel difference 4.7 and 3.5/255); each guard refuses its bad input and the clean rebuild passes. Still open: verifying all nine titles in one `verify_covers.py` run fails the cross-title spine-title check on James, as before this change.
+
 ## 2026-11-17 (later): Grounds 39–43 added to the color list
 - **Why:** five grounds on shipped covers were missing from `CoverBlendMottlePairings`, the page new grounds are chosen from, so a future cover could reuse one by accident.
 - **Added:** 39 Gunmetal `#323232`, 40 Coal `#1b1b1b`, 41 Sapphire `#15264a`, 42 Ochre `#3e2c0e`, 43 Verdigris `#1b3b40`: a mottle and a blend for each (480px, in `assets/cover-mottles` and `assets/cover-blends`), the pairings table and page, and both asset READMEs.
