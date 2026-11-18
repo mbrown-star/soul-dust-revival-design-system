@@ -17,15 +17,24 @@ pipeline, never hand-patch the PNG or the PDF.
 
 Usage: python3 verify_covers.py
 Reads build/manifest.json and build/png/*.png, as written by gen_covers.py and render.py.
+On a clean pass it writes build/.verified-<key> holding the SHA-256 of the PNG it checked;
+to_pdf.py refuses to export a PNG without a matching stamp. Any earlier stamp for a title in
+the manifest is deleted first, so a failed run never leaves an old stamp behind.
 """
 import json, os, sys
 import numpy as np
 from PIL import Image
 
+from guards import build_dir, sha256, stamp_path
+
 BASE = os.path.dirname(os.path.abspath(__file__))
-BUILD = os.path.join(BASE, "build")
+BUILD = build_dir(BASE)
 CAL = json.load(open(f"{BASE}/calibration.json"))
 manifest = json.load(open(f"{BUILD}/manifest.json"))
+for _m in manifest:
+    if os.path.exists(stamp_path(BUILD, _m["key"])):
+        os.remove(stamp_path(BUILD, _m["key"]))
+png_hashes = {}  # hash of exactly the bytes that were checked, taken before measuring
 
 GOLD = (176, 141, 46)
 GOLD2 = (173, 154, 95)
@@ -58,6 +67,7 @@ for m in manifest:
         failures.append(f"[{key}] missing rendered PNG at {png_path} -- run render.py first")
         continue
 
+    png_hashes[key] = sha256(png_path)
     img = Image.open(png_path).convert("RGB")
     arr = np.array(img)
     h, w = arr.shape[0], arr.shape[1]
@@ -325,5 +335,9 @@ if failures:
     print("then re-run gen_covers.py -> render.py -> verify_covers.py from the top.")
     sys.exit(1)
 else:
-    print("\nAll checks passed. Safe to proceed to JPEG conversion / to_pdf.py / delivery.")
+    for key, digest in png_hashes.items():
+        with open(stamp_path(BUILD, key), "w") as f:
+            f.write(digest + "\n")
+    print("\nAll checks passed. Stamped " + ", ".join(sorted(png_hashes)) +
+          ". Safe to proceed to to_pdf.py <key> --interior <manuscript.pdf>.")
     sys.exit(0)

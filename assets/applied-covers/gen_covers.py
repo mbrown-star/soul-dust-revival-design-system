@@ -3,7 +3,8 @@ gen_covers.py -- build the print HTML for Soul Dust Revival wraparound covers.
 
 Reads every layout number from calibration.json (never hardcode one here) and each
 title's copy from titles/<key>.json, and writes build/<key>.html plus build/manifest.json.
-Then: render.py -> verify_covers.py (must exit 0) -> to_pdf.py.
+Then: render.py -> verify_covers.py (must exit 0) -> to_pdf.py <key> --interior <manuscript.pdf>.
+Refuses a copy file with a footer field or a ground another title already uses (guards.py).
 
 Usage:
   python3 gen_covers.py                 # every title in titles/
@@ -21,8 +22,10 @@ import json
 import os
 import sys
 
+from guards import GuardError, build_dir, find_footer_keys, register_grounds, register_rows_for
+
 BASE = os.path.dirname(os.path.abspath(__file__))
-BUILD = os.path.join(BASE, "build")
+BUILD = build_dir(BASE)
 CAL = json.load(open(os.path.join(BASE, "calibration.json")))
 DPI = 300
 # The hero photo: ../hero-source.png in the design system, or hero-source.png beside this
@@ -257,13 +260,31 @@ html,body{{width:{W}px;height:{H}px;overflow:hidden;background:{ground}}}
             "html": out, "journey": bool(spine.get("journey")), "spine_text": bool(sp_html), **d}
 
 
+def check_spec(k, spec, register):
+    """Refuse copy files that would bring back a known mistake."""
+    footers = find_footer_keys(spec)
+    if footers:
+        raise GuardError(f"titles/{k}.json has a footer field ({', '.join(footers)}). The back panel has no "
+                         "footer (2026-10-02 directive); delete the field.")
+    ground = spec["ground"].lower()
+    mine = register_rows_for(spec["front"]["title"], register)
+    taken = [t for t, g in register if g == ground and (t, g) not in mine]
+    if taken:
+        raise GuardError(f"titles/{k}.json ground {spec['ground']} is already used in the README register by "
+                         f"{'; '.join(taken)}. Each title needs its own ground: pick one not in the register.")
+
+
 def main(keys):
     tdir = os.path.join(BASE, "titles")
     names = keys or sorted(f[:-5] for f in os.listdir(tdir) if f.endswith(".json"))
+    register = register_grounds(os.path.join(BASE, "README.md"))
+    if not register:
+        raise GuardError("could not read the ground register from README.md, so the duplicate-ground check can't run")
     manifest = []
     for k in names:
         spec = json.load(open(os.path.join(tdir, k + ".json")))
         spec.setdefault("key", k)
+        check_spec(k, spec, register)
         manifest.append(build(spec))
         print(f"built build/{k}.html  {manifest[-1]['full_px']}x{manifest[-1]['fullh_px']}px, spine {manifest[-1]['spine_px']}px")
     os.makedirs(BUILD, exist_ok=True)
