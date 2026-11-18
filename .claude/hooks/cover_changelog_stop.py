@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Stop hook: don't let Claude finish while cover-pipeline changes are undocumented.
 
-Compared with the branch point from the default branch (merge-base with origin/main, so
-committed, staged, unstaged and untracked changes all count):
+Checked over two spans, so an older changelog entry on the branch can't cover a new edit:
+  - uncommitted work (HEAD -> working tree, staged, unstaged and untracked), and
+  - the whole branch (merge-base with origin/main -> working tree).
+In each span:
   - a change to a cover script or calibration.json needs a change to CHANGELOG.md at the
     repo root (the design system's changelog);
   - a new titles/<key>.json needs a change to the README's "## Register of shipped covers".
@@ -87,17 +89,21 @@ def main():
     base = base_commit(root)
     if not base:
         return 0
-    scripts, titles = pipeline_changes(root, base)
-    if not scripts and not titles:
-        return 0
-
+    head = (git(root, "rev-parse", "HEAD") or "").strip()
     problems = []
-    if scripts and read_at(root, base, CHANGELOG_REL) == read_now(root, CHANGELOG_REL):
-        problems.append(f"{', '.join(scripts)} changed but {CHANGELOG_REL} didn't. Add a dated entry saying what "
-                        "changed and why.")
-    if titles and section(read_at(root, base, README_REL), "Register") == section(read_now(root, README_REL), "Register"):
-        problems.append(f"New title {', '.join(titles)} but the register of shipped covers in {README_REL} didn't "
-                        "change. Add its row (title, type, trim, pages, spine, ground).")
+    for since, span in ((head, "uncommitted"), (base, "on this branch")):
+        if not since:
+            continue
+        scripts, titles = pipeline_changes(root, since)
+        if scripts and read_at(root, since, CHANGELOG_REL) == read_now(root, CHANGELOG_REL):
+            problems.append(f"{', '.join(scripts)} changed ({span}) but {CHANGELOG_REL} didn't. Add a dated entry "
+                            "saying what changed and why.")
+        if titles and (section(read_at(root, since, README_REL), "Register")
+                       == section(read_now(root, README_REL), "Register")):
+            problems.append(f"New title {', '.join(titles)} ({span}) but the register of shipped covers in "
+                            f"{README_REL} didn't change. Add its row (title, type, trim, pages, spine, ground).")
+        if problems:
+            break
     if not problems:
         return 0
     msg = "Cover pipeline docs check: " + " ".join(problems)

@@ -215,7 +215,7 @@ class ChangelogStopHook(unittest.TestCase):
         self.write("gen_covers.py", "print('changed')\n")
         code, _, err = self.stop()
         self.assertEqual(code, 2)
-        self.assertIn("gen_covers.py changed but CHANGELOG.md didn't", err)
+        self.assertIn("gen_covers.py changed (uncommitted) but CHANGELOG.md didn't", err)
 
     def test_calibration_change_with_changelog_allows(self):
         self.write("calibration.json", '{"a": 1}\n')
@@ -241,6 +241,20 @@ class ChangelogStopHook(unittest.TestCase):
         self.write("gen_covers.py", "print('changed')\n")
         self.git("-c", "user.email=t@example.com", "-c", "user.name=t", "commit", "-qam", "change")
         self.assertEqual(self.stop()[0], 2)
+
+    def test_old_changelog_entry_does_not_cover_a_new_edit(self):
+        # Regression: an earlier commit on the branch changed CHANGELOG.md, so a later
+        # uncommitted script edit compared only against the branch point slipped through.
+        self.write("gen_covers.py", "print('changed')\n")
+        self.write("../../CHANGELOG.md", "\n## 2026-11-18: first change\n", mode="a")
+        self.git("-c", "user.email=t@example.com", "-c", "user.name=t", "commit", "-qam", "first")
+        self.assertEqual(self.stop()[0], 0)
+        self.write("gen_covers.py", "print('changed again')\n", mode="a")
+        code, _, err = self.stop()
+        self.assertEqual(code, 2)
+        self.assertIn("(uncommitted)", err)
+        self.write("../../CHANGELOG.md", "- and a second change\n", mode="a")
+        self.assertEqual(self.stop()[0], 0)
 
     def test_new_title_without_register_row_blocks(self):
         self.write("titles/james.json", "{}\n")
